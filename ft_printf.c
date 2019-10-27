@@ -6,12 +6,13 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/26 23:23:07 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/27 18:26:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "../libft/includes/libft.h"
+#include "stdbool.h"
 
 static int	is_arg(char *str)
 {
@@ -73,45 +74,61 @@ static char	*ft_convert_base(unsigned int num, int base)
 ** You must manage the flags #0-+ and space
 ** You must manage the minimum field-width
 ** You must manage the precision
+**
+** %[flags][width][.precision][length]specifier
 */
 
 int			ft_printf(const char *format,  ...)
 {
 	int	i;
 	va_list			valist;
-	char			*str;
+	char			*fstr;
 	char			*s;
 	int				len;
+	bool			parsing;
 
-	str = (char*)format;
+	fstr = (char*)format;
 	va_start(valist, format);
 
 	len = ft_strlen(format);
 	i = 0;
-	while (i < len)
+	parsing = false;
+	while (*fstr != '\0')
 	{
-		if (format[i] == '%')
+		if (*fstr == '%')
 		{
-			i++;
-			if (format[i] == 'c')
+			fstr++;
+			// Parse flags first
+			while (parsing)
+			{
+				if (*fstr == '#') { }
+				else if (*fstr == '0') { }
+				else if (*fstr == '-') { }
+				else if (*fstr == '+') { }
+				else if (*fstr == ' ') { }
+				else { parsing = false; }
+			}
+
+
+			if (*fstr == 'c')
 			{
 				ft_putchar(va_arg(valist, int));
 			}
-			if (format[i] == 's')
+			if (*fstr == 's')
 			{
 				s = va_arg(valist, char *);
 				ft_putstr(s);
 			}
-			if (format[i] == 'p')
+			if (*fstr == 'p')
 			{
-				int a = va_arg(valist, unsigned int);
-				ft_putstr(ft_convert_base(a, 16));
+				unsigned long a = va_arg(valist, unsigned int);
+				ft_putnbr(a);
 			}
-			if (format[i] == 'i')
+			if (*fstr == 'i')
 			{
 				ft_putnbr(va_arg(valist, int));
 			}
-			if (format[i] == 'x')
+			if (*fstr == 'x')
 			{
 				int a = va_arg(valist, unsigned int);
 				ft_putstr(ft_convert_base(a, 16));
@@ -119,9 +136,9 @@ int			ft_printf(const char *format,  ...)
 		}
 		else
 		{
-			ft_putchar(format[i]);
+			ft_putchar(*fstr);
 		}
-		i++;
+		fstr++;
 
 	}
 	va_end(valist);
