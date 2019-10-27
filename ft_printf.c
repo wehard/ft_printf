@@ -6,12 +6,14 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/27 18:26:59 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/27 18:57:18 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <stdarg.h>
 #include "../libft/includes/libft.h"
+#include "ft_printf.h"
 #include "stdbool.h"
 
 static int	is_arg(char *str)
@@ -78,6 +80,19 @@ static char	*ft_convert_base(unsigned int num, int base)
 ** %[flags][width][.precision][length]specifier
 */
 
+static void	ft_init_flags(t_flags *flags)
+{
+	if (!flags)
+	{
+		// Malloc??
+	}
+	flags->hash = 0;
+	flags->zero = 0;
+	flags->minus = 0;
+	flags->plus = 0;
+	flags->space = 0;
+}
+
 int			ft_printf(const char *format,  ...)
 {
 	int	i;
@@ -86,9 +101,12 @@ int			ft_printf(const char *format,  ...)
 	char			*s;
 	int				len;
 	bool			parsing;
+	t_flags			*flags;
 
 	fstr = (char*)format;
 	va_start(valist, format);
+
+	flags = (t_flags*)malloc(sizeof(t_flags));
 
 	len = ft_strlen(format);
 	i = 0;
@@ -99,16 +117,16 @@ int			ft_printf(const char *format,  ...)
 		{
 			fstr++;
 			// Parse flags first
+			ft_init_flags(flags);
 			while (parsing)
 			{
-				if (*fstr == '#') { }
-				else if (*fstr == '0') { }
-				else if (*fstr == '-') { }
-				else if (*fstr == '+') { }
-				else if (*fstr == ' ') { }
+				if (*fstr == '#') { flags->hash = true; }
+				else if (*fstr == '0') { flags->zero = true; }
+				else if (*fstr == '-') { flags->minus = true; }
+				else if (*fstr == '+') { flags->plus = true; }
+				else if (*fstr == ' ') { flags->space = true; }
 				else { parsing = false; }
 			}
-
 
 			if (*fstr == 'c')
 			{
@@ -142,6 +160,6 @@ int			ft_printf(const char *format,  ...)
 
 	}
 	va_end(valist);
-	//ft_putchar('\n');
+	free(flags);
 	return (0);
 }
