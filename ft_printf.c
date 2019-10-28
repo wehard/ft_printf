@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/27 18:57:18 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/28 12:56:50 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,7 @@
 #include "ft_printf.h"
 #include "stdbool.h"
 
-static int	is_arg(char *str)
-{
-	if (*str == '%' && *(str + 1) != '\0')
-	{
-		if (*(str + 1) == 'c' || *(str + 1) == 's' || *(str + 1) == 'p')
-			return (1);
-	}
-	return (0);
-}
-
-static int	ft_countargs(char *str)
-{
-	int n;
-	int i;
-
-	n = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (is_arg(str + i))
-			n++;
-		i++;
-	}
-	return (n);
-}
-
-static char ft_remap(int n)
+static char	ft_remap(int n)
 {
 	if (n >= 0 && n <= 9)
 		return ((char)('0' + n));
@@ -58,7 +32,7 @@ static char	*ft_convert_base(unsigned int num, int base)
 
 	ptr = &buffer[49];
 	*ptr = '\0';
-	while(num > 0)
+	while (num > 0)
 	{
 		*--ptr = digits[num % base];
 		num /= base;
@@ -95,12 +69,11 @@ static void	ft_init_flags(t_flags *flags)
 
 int			ft_printf(const char *format,  ...)
 {
-	int	i;
+	int				i;
 	va_list			valist;
 	char			*fstr;
-	char			*s;
 	int				len;
-	bool			parsing;
+	bool			parsing_flags;
 	t_flags			*flags;
 
 	fstr = (char*)format;
@@ -110,46 +83,69 @@ int			ft_printf(const char *format,  ...)
 
 	len = ft_strlen(format);
 	i = 0;
-	parsing = false;
+	parsing_flags = true;
 	while (*fstr != '\0')
 	{
 		if (*fstr == '%')
 		{
 			fstr++;
-			// Parse flags first
+			/*
+			** Parse flags first
+			*/
 			ft_init_flags(flags);
-			while (parsing)
+			while (parsing_flags)
 			{
-				if (*fstr == '#') { flags->hash = true; }
-				else if (*fstr == '0') { flags->zero = true; }
-				else if (*fstr == '-') { flags->minus = true; }
-				else if (*fstr == '+') { flags->plus = true; }
-				else if (*fstr == ' ') { flags->space = true; }
-				else { parsing = false; }
+				if (*fstr == '#') { flags->hash = true; fstr++; }
+				else if (*fstr == '0') { flags->zero = true; fstr++; }
+				else if (*fstr == '-') { flags->minus = true; fstr++; }
+				else if (*fstr == '+') { flags->plus = true; fstr++; }
+				else if (*fstr == ' ') { flags->space = true; fstr++; }
+				else { parsing_flags = false; }
 			}
 
 			if (*fstr == 'c')
 			{
-				ft_putchar(va_arg(valist, int));
+				int value = va_arg(valist, int);
+				ft_output_c(value, flags);
 			}
 			if (*fstr == 's')
 			{
-				s = va_arg(valist, char *);
-				ft_putstr(s);
+				char *value = va_arg(valist, char *);
+				ft_output_s(value, flags);
 			}
 			if (*fstr == 'p')
 			{
-				unsigned long a = va_arg(valist, unsigned int);
-				ft_putnbr(a);
+				unsigned long value = va_arg(valist, unsigned int);
+				ft_output_p(value, flags);
+			}
+			if (*fstr == 'd')
+			{
+				int i = va_arg(valist, int);
+				ft_output_di(i, flags);
 			}
 			if (*fstr == 'i')
+			{
+				int i = va_arg(valist, int);
+				ft_output_di(i, flags);
+			}
+			if (*fstr == 'o')
+			{
+				int i = va_arg(valist, unsigned int);
+				ft_output_o(ft_atoi(ft_convert_base(i, 8)), flags);
+			}
+			if (*fstr == 'u')
 			{
 				ft_putnbr(va_arg(valist, int));
 			}
 			if (*fstr == 'x')
 			{
 				int a = va_arg(valist, unsigned int);
-				ft_putstr(ft_convert_base(a, 16));
+				ft_output_x_low(a, flags);
+			}
+			if (*fstr == 'X')
+			{
+				int a = va_arg(valist, unsigned int);
+				ft_output_x_up(a, flags);
 			}
 		}
 		else
@@ -157,7 +153,6 @@ int			ft_printf(const char *format,  ...)
 			ft_putchar(*fstr);
 		}
 		fstr++;
-
 	}
 	va_end(valist);
 	free(flags);
