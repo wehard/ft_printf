@@ -6,13 +6,13 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/28 13:04:30 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/28 15:56:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdarg.h>
-#include "../libft/includes/libft.h"
+#include "libft.h"
 #include "ft_printf.h"
 #include "stdbool.h"
 

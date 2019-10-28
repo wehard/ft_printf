@@ -6,12 +6,12 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/28 12:44:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/28 15:56:26 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "../libft/includes/libft.h"
+#include "libft.h"
 
 void	ft_output_di(int n, t_flags *flags)
 {
