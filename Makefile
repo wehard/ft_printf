@@ -6,34 +6,37 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/10/27 10:34:53 by wkorande         ###   ########.fr        #
+#    Updated: 2019/10/28 15:53:10 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = libftprintf.a
 
-LIBFT = ./libft
+LIBFTDIR = ../libft
 
-SRC =
+SRC = 	ft_printf.c\
+		ft_handle_str.c\
+		ft_handle_nbr.c
 
-SRCDIR = srcs
+SRCDIR = src
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 
-OUT = $(SRC:.c=.o)
+OBJS = $(SRC:.c=.o)
 
-INCL = includes
+INCLDIR = include
 
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -I $(INCL) -c $(SRCS)
-	ar rc $(NAME) $(OUT)
+	make -C $(LIBFTDIR)
+	gcc -Wall -Wextra -Werror -I $(INCLDIR) -c $(SRCS)
+	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
 clean:
-	rm -f $(OUT)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
