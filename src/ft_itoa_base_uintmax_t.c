@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_str.c                                    :+:      :+:    :+:   */
+/*   ft_itoa_base_uintmax_t.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 10:25:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/28 18:56:09 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/17 14:46:08 by wkorande          #+#    #+#             */
+/*   Updated: 2019/10/28 18:15:38 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdlib.h>
 #include "libft.h"
 
-void	ft_output_c(char c, t_flags *flags)
+char	*ft_itoa_base_uintmax_t(uintmax_t n, char *digits)
 {
-	ft_putchar(c);
-}
+	char			*str;
+	unsigned int	len;
+	unsigned int	base;
 
-void	ft_output_s(char *s, t_flags *flags)
-{
-	ft_putstr(s);
-}
-
-void	ft_output_p(uintmax_t p, t_flags *flags)
-{
-	ft_putstr("0x");
-	ft_putnbr_base_uintmax_t(p, 16, BASE16LOW);
+	base = ft_strlen(digits);
+	len = (unsigned int)ft_ndigits_base(n, base) + (n < 0);
+	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	str[len--] = '\0';
+	while (n != 0)
+	{
+		str[len] = digits[n % base];
+		n /= base;
+		len--;
+	}
+	return (str);
 }

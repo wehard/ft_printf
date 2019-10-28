@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_str.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr_base_uintmax_t.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 10:25:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/28 18:56:09 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/28 18:59:48 by wkorande          #+#    #+#             */
+/*   Updated: 2019/10/28 19:06:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
+#include "ft_printf.h"
 
-void	ft_output_c(char c, t_flags *flags)
+void	ft_putnbr_base_uintmax_t(uintmax_t n, int base, char *digits)
 {
-	ft_putchar(c);
-}
-
-void	ft_output_s(char *s, t_flags *flags)
-{
-	ft_putstr(s);
-}
-
-void	ft_output_p(uintmax_t p, t_flags *flags)
-{
-	ft_putstr("0x");
-	ft_putnbr_base_uintmax_t(p, 16, BASE16LOW);
+	if (n < base)
+	{
+		ft_putchar(digits[n]);
+	}
+	else
+	{
+		ft_putnbr_base_uintmax_t(n / base, base, digits);
+		ft_putnbr_base_uintmax_t(n % base, base, digits);
+	}
 }

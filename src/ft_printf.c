@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/28 15:56:02 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/28 18:44:45 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ int			ft_printf(const char *format,  ...)
 			}
 			if (*fstr == 'p')
 			{
-				unsigned long value = va_arg(valist, unsigned int);
-				ft_output_p(value, flags);
+				void *value = va_arg(valist, void *);
+				ft_output_p(*(uintmax_t*)&value, flags);
 			}
 			if (*fstr == 'd')
 			{
@@ -130,8 +130,8 @@ int			ft_printf(const char *format,  ...)
 			}
 			if (*fstr == 'o')
 			{
-				int i = va_arg(valist, unsigned int);
-				ft_output_o(ft_atoi(ft_convert_base(i, 8)), flags);
+				int i = va_arg(valist, int);
+				ft_output_o(i, flags);
 			}
 			if (*fstr == 'u')
 			{

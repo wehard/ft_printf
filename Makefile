@@ -6,10 +6,9 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/10/28 16:36:45 by wkorande         ###   ########.fr        #
+#    Updated: 2019/10/28 19:05:50 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME = libftprintf.a
 
@@ -21,7 +20,10 @@ FLAGS = #-Wall -Wextra -Werror
 
 SRC = 	ft_printf.c\
 		ft_handle_str.c\
-		ft_handle_nbr.c
+		ft_handle_nbr.c\
+		ft_putnbr_uintmax_t.c\
+		ft_putnbr_base_uintmax_t.c\
+		ft_itoa_base_uintmax_t.c
 
 SRCDIR = src
 
@@ -34,16 +36,21 @@ INCLDIR = 	include
 all: $(NAME)
 
 $(NAME):
-	make -C $(LIBFTDIR)
-	cp $(LIBFTDIR)/$(LIBFT) $(NAME)
-	gcc $(FLAGS) -I $(INCLDIR) -I $(LIBFTDIR)/includes -c $(SRCS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@printf "\033[31m%s\n\033[34m" "Making $(LIBFT)"
+	@make -C $(LIBFTDIR)
+	@printf "\033[31m%s\n\033[34m" "Copying $(LIBFT) and renaming to $(NAME)"
+	@cp $(LIBFTDIR)/$(LIBFT) $(NAME)
+	@printf "\033[31m%s\n\033[34m" "Creating objects from $(SRCS)"
+	@gcc $(FLAGS) -I $(INCLDIR) -I $(LIBFTDIR)/includes -c $(SRCS)
+	@printf "\033[31m%s\n\033[34m" "Creating final $(NAME)"
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
-test:
+test: re
 	gcc -o test main.c -I include  -L. -lftprintf
 
 clean:
+	@printf "\033[1;30m"
 	make clean -C $(LIBFTDIR)
 	rm -f $(OBJS)
 

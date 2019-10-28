@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/28 12:43:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/28 17:34:57 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	main(void)
 	//char *str = "%cWorld";
 	//printf("%-20s%s", "printf", "ft_printf");
 	ft_printf("%s World: %c\n", "Hello", 'x');
-	ft_printf("Pointer: %p\n", &p);
+	ft_printf("ft_printf p:\t%p\n", &p);
+	printf("printf p:\t%p\n", &p);
 	ft_printf("Hex (ff): %x\n", 255);
 	ft_printf("Hex (FF): %X\n", 255);
 	ft_printf("Octal (377): %o\n", 255);

@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_str.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr_uintmax_t.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 10:25:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/28 18:56:09 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/16 17:34:31 by wkorande          #+#    #+#             */
+/*   Updated: 2019/10/28 19:06:32 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
+#include "ft_printf.h"
 
-void	ft_output_c(char c, t_flags *flags)
+void	ft_putnbr_uintmax_t(uintmax_t n)
 {
-	ft_putchar(c);
-}
-
-void	ft_output_s(char *s, t_flags *flags)
-{
-	ft_putstr(s);
-}
-
-void	ft_output_p(uintmax_t p, t_flags *flags)
-{
-	ft_putstr("0x");
-	ft_putnbr_base_uintmax_t(p, 16, BASE16LOW);
+	if (n < 10)
+	{
+		ft_putchar('0' + n);
+	}
+	else
+	{
+		ft_putnbr_uintmax_t(n / 10);
+		ft_putnbr_uintmax_t(n % 10);
+	}
 }
