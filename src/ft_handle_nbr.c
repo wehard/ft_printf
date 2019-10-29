@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 16:01:39 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:40:49 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_handle_f(double d, t_flags *flags)
 	frac -= dec;
 	ft_putnbr(dec);
 	ft_outchar(".", 1);
-	frac *= 1000000;
-	dec = (int)frac;
+	frac *= ft_pow(10, flags->precision);
+	dec = (signed long int)(frac + 0.5); // Round up?
 	ft_outchar(ft_itoa(dec), ft_ndigits(dec));
 }

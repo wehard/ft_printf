@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 15:59:38 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:42:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ int	main(void)
 	printf("   printf o (377): %15o\n", 255);
 
 	// Float
-	ft_printf("ft_printf f (3.14): %f\n", 0.456/1.1);
-	printf("   printf f (3.14): %f\n", 0.456/1.1);
+	double d = 1234.56789;
+	ft_printf("ft_printf f: %.3f\n", d);
+	printf("   printf f: %.3f\n", d);
 
 	//printf("Octal (377): %o\n", 255);
 	//printf("%s World: %x %p", "Hello", 15, &p);

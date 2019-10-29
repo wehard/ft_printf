@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 15:28:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:36:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_init_flags(t_flags *flags)
 	flags->plus = 0;
 	flags->space = 0;
 	flags->width = 0;
-	flags->precision = 0;
+	flags->precision = 6;
 }
 
 static t_flags	*ft_create_flags(void)
@@ -93,9 +93,12 @@ static void	ft_parse_precision(char **fstr, t_flags *flags)
 	if (*(*fstr) == '.')
 	{
 		(*fstr)++;
-		flags->precision = ft_atoi(*fstr);
+		if (ft_isdigit(*(*fstr)))
+		{
+			flags->precision = ft_atoi(*fstr);
+			(*fstr) += ft_ndigits(flags->precision);
+		}
 	}
-	(*fstr) += ft_ndigits(flags->precision);
 }
 
 int			ft_printf(const char *format,  ...)
@@ -119,6 +122,9 @@ int			ft_printf(const char *format,  ...)
 			ft_parse_flags(&fstr, flags);
 			ft_parse_width(&fstr, flags);
 			ft_parse_precision(&fstr, flags);
+
+			if (*fstr == '%')
+				ft_putchar('%');
 			if (*fstr == 'c')
 				ft_handle_c(va_arg(valist, int), flags);
 			if (*fstr == 's')
