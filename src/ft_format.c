@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_str.c                                    :+:      :+:    :+:   */
+/*   ft_format.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 10:25:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 14:26:45 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
+/*   Updated: 2019/10/29 15:07:35 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
+#include "ft_printf.h"
 
-void	ft_handle_c(char c, t_flags *flags)
+void	ft_apply_width(t_flags *flags, int len, void (*out_func)(const char *, int), void *data)
 {
-	ft_apply_width(flags, 1, &ft_outchar, &c);
-}
+	int spaces;
 
-void	ft_handle_s(char *s, t_flags *flags)
-{
-	ft_apply_width(flags, ft_strlen(s), &ft_outchar, s);
-}
-
-void	ft_handle_p(uintmax_t p, t_flags *flags)
-{
-	char *pstr;
-	char *pf;
-
-	pf = "0x";
-	pstr = ft_strjoin(pf, ft_itoa_base_uintmax_t(p, BASE16LOW));
-	ft_apply_width(flags, ft_strlen(pstr), &ft_outchar, pstr);
+	spaces = flags->width - len;
+	if (flags->minus)
+	{
+		out_func(data, len);
+		while (spaces-- > 0)
+			ft_putchar(SPACE);
+	}
+	else
+	{
+		while (spaces-- > 0)
+		{
+			flags->zero ? ft_putchar(ZERO) : ft_putchar(SPACE);
+		}
+		out_func(data, len);
+	}
 }

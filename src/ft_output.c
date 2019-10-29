@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_str.c                                    :+:      :+:    :+:   */
+/*   ft_output.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 10:25:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 14:26:45 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
+/*   Updated: 2019/10/29 14:48:54 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <unistd.h>
 #include "libft.h"
+#include "ft_printf.h"
 
-void	ft_handle_c(char c, t_flags *flags)
+void	ft_outchar(const char *data, int len)
 {
-	ft_apply_width(flags, 1, &ft_outchar, &c);
+	write(1, data, len);
 }
 
-void	ft_handle_s(char *s, t_flags *flags)
-{
-	ft_apply_width(flags, ft_strlen(s), &ft_outchar, s);
-}
-
-void	ft_handle_p(uintmax_t p, t_flags *flags)
-{
-	char *pstr;
-	char *pf;
-
-	pf = "0x";
-	pstr = ft_strjoin(pf, ft_itoa_base_uintmax_t(p, BASE16LOW));
-	ft_apply_width(flags, ft_strlen(pstr), &ft_outchar, pstr);
-}

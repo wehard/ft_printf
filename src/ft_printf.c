@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 11:05:48 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 15:09:16 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,46 +122,47 @@ int			ft_printf(const char *format,  ...)
 			if (*fstr == 'c')
 			{
 				int value = va_arg(valist, int);
-				ft_output_c(value, flags);
+				ft_handle_c(value, flags);
 			}
 			if (*fstr == 's')
 			{
 				char *value = va_arg(valist, char *);
-				ft_output_s(value, flags);
+				ft_handle_s(value, flags);
 			}
 			if (*fstr == 'p')
 			{
 				void *value = va_arg(valist, void *);
-				ft_output_p(*(uintmax_t*)&value, flags);
+				ft_handle_p(*(uintmax_t*)&value, flags);
 			}
 			if (*fstr == 'd')
 			{
 				int i = va_arg(valist, int);
-				ft_output_di(i, flags);
+				ft_handle_di(i, flags);
 			}
 			if (*fstr == 'i')
 			{
 				int i = va_arg(valist, int);
-				ft_output_di(i, flags);
+				ft_handle_di(i, flags);
 			}
 			if (*fstr == 'o')
 			{
 				int i = va_arg(valist, int);
-				ft_output_o(i, flags);
+				ft_handle_o(i, flags);
 			}
 			if (*fstr == 'u')
 			{
-				ft_putnbr(va_arg(valist, int));
+				unsigned int i = va_arg(valist, unsigned int);
+				ft_handle_u(i, flags);
 			}
 			if (*fstr == 'x')
 			{
 				int a = va_arg(valist, unsigned int);
-				ft_output_x_low(a, flags);
+				ft_handle_x_low(a, flags);
 			}
 			if (*fstr == 'X')
 			{
 				int a = va_arg(valist, unsigned int);
-				ft_output_x_up(a, flags);
+				ft_handle_x_up(a, flags);
 			}
 		}
 		else

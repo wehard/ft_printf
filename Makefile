@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/10/29 12:24:31 by wkorande         ###   ########.fr        #
+#    Updated: 2019/10/29 14:50:31 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ SRC = 	ft_printf.c\
 		ft_putnbr_uintmax_t.c\
 		ft_putnbr_base_uintmax_t.c\
 		ft_itoa_base_uintmax_t.c\
-		ft_ndigits_base_uintmax_t.c
+		ft_ndigits_base_uintmax_t.c\
+		ft_output.c\
+		ft_format.c
 
 SRCDIR = src
 
@@ -48,7 +50,8 @@ $(NAME):
 	@ranlib $(NAME)
 
 test: re
-	gcc -o test main.c -I include  -L. -lftprintf
+	@printf "\033[33m%s\n\033[34m" "Making test"
+	@gcc -o test main.c -I include  -L. -lftprintf
 
 clean:
 	@printf "\033[1;30m"
