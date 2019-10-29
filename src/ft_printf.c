@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 17:22:46 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 17:45:43 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdarg.h>
 #include "libft.h"
 #include "ft_printf.h"
-#include "stdbool.h"
 
 /*
 ** You have to manage the following conversions: csp
@@ -30,89 +29,16 @@
 ** %[flags][width][.precision][length]specifier
 */
 
-static void	ft_init_flags(t_flags *flags)
-{
-	if (!flags)
-		return ;
-	flags->hash = 0;
-	flags->zero = 0;
-	flags->minus = 0;
-	flags->plus = 0;
-	flags->space = 0;
-	flags->width = 0;
-	flags->precision = 6; // ?
-}
-
-static t_flags	*ft_create_flags(void)
-{
-	t_flags *flags;
-
-	if (!(flags = (t_flags*)malloc(sizeof(t_flags))))
-		return (NULL);
-	ft_init_flags(flags);
-	return (flags);
-}
-
-static void	ft_parse_flags(char **fstr, t_flags *flags)
-{
-	bool	is_parsing;
-
-	is_parsing = true;
-	while (is_parsing)
-	{
-		if (*(*fstr) == '#')
-			flags->hash = true;
-		else if (*(*fstr) == '0')
-			flags->zero = true;
-		else if (*(*fstr) == '-')
-			flags->minus = true;
-		else if (*(*fstr) == '+')
-			flags->plus = true;
-		else if (*(*fstr) == ' ')
-			flags->space = true;
-		else
-		{
-			is_parsing = false;
-			break ;
-		}
-		(*fstr)++;
-	}
-}
-
-static void	ft_parse_width(char **fstr, t_flags *flags)
-{
-	if (ft_isdigit(*(*fstr)))
-	{
-		flags->width = ft_atoi(*fstr);
-	}
-	(*fstr) += ft_ndigits(flags->width);
-}
-
-static void	ft_parse_precision(char **fstr, t_flags *flags)
-{
-	if (*(*fstr) == '.')
-	{
-		(*fstr)++;
-		if (ft_isdigit(*(*fstr)))
-		{
-			flags->precision = ft_atoi(*fstr);
-			(*fstr) += ft_ndigits(flags->precision);
-		}
-	}
-}
-
-int			ft_printf(const char *format,  ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list			valist;
 	char			*fstr;
-
 	t_flags			*flags;
 
 	if (!(flags = ft_create_flags()))
 		return (-1);
 	fstr = (char*)format;
 	va_start(valist, format);
-
 	while (*fstr != '\0')
 	{
 		if (*fstr == '%')

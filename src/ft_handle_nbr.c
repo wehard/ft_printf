@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 17:26:11 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 17:32:20 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_handle_u(unsigned int n, t_flags *flags)
 void	ft_handle_x_low(unsigned int n, t_flags *flags)
 {
 	char *s;
+
 	if (flags->hash)
 		s = ft_strjoin("0x", ft_itoa_base(n, BASE16LOW));
 	else
@@ -41,6 +42,7 @@ void	ft_handle_x_low(unsigned int n, t_flags *flags)
 void	ft_handle_x_up(unsigned int n, t_flags *flags)
 {
 	char *s;
+
 	if (flags->hash)
 		s = ft_strjoin("0x", ft_itoa_base(n, BASE16UP));
 	else
@@ -50,7 +52,7 @@ void	ft_handle_x_up(unsigned int n, t_flags *flags)
 
 void	ft_handle_f(double d, t_flags *flags)
 {
-	int 	dec;
+	int		dec;
 	double	frac;
 
 	frac = d;
@@ -59,6 +61,6 @@ void	ft_handle_f(double d, t_flags *flags)
 	ft_putnbr(dec);
 	ft_outchar(".", 1);
 	frac *= ft_pow(10, flags->precision);
-	dec = (signed long int)(frac + 0.5); // Round up?
+	dec = (signed long int)(frac + 0.5);
 	ft_outchar(ft_itoa(dec), ft_ndigits(dec));
 }

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 15:29:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 17:40:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	ft_putnbr_uintmax_t(uintmax_t n);
 void	ft_putnbr_base_uintmax_t(uintmax_t n, int base, char *digits);
 char	*ft_itoa_base_uintmax_t(uintmax_t n, char *digits);
 int		ft_ndigits_base_uintmax_t(uintmax_t n, int base);
+
+t_flags	*ft_create_flags(void);
+void	ft_init_flags(t_flags *flags);
+void	ft_parse_flags(char **fstr, t_flags *flags);
+void	ft_parse_width(char **fstr, t_flags *flags);
+void	ft_parse_precision(char **fstr, t_flags *flags);
 
 void	ft_outchar(const char *data, int len);
 void	ft_apply_width(t_flags *flags, int len, void (*out_func)(const char *, int), void *data);
