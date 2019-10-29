@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/10/28 19:05:50 by wkorande         ###   ########.fr        #
+#    Updated: 2019/10/29 12:24:31 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC = 	ft_printf.c\
 		ft_handle_nbr.c\
 		ft_putnbr_uintmax_t.c\
 		ft_putnbr_base_uintmax_t.c\
-		ft_itoa_base_uintmax_t.c
+		ft_itoa_base_uintmax_t.c\
+		ft_ndigits_base_uintmax_t.c
 
 SRCDIR = src
 

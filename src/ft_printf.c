@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/28 18:44:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 11:05:48 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,6 @@
 #include "libft.h"
 #include "ft_printf.h"
 #include "stdbool.h"
-
-static char	ft_remap(int n)
-{
-	if (n >= 0 && n <= 9)
-		return ((char)('0' + n));
-	else
-		return ((char)(n - 10 + 'a'));
-}
-
-static char	*ft_convert_base(unsigned int num, int base)
-{
-	char digits[] = "0123456789abcdef";
-	char buffer[50];
-	char *ptr;
-
-	ptr = &buffer[49];
-	*ptr = '\0';
-	while (num > 0)
-	{
-		*--ptr = digits[num % base];
-		num /= base;
-	}
-	return(ptr);
-}
 
 /*
 ** You have to manage the following conversions: csp
@@ -57,52 +33,92 @@ static char	*ft_convert_base(unsigned int num, int base)
 static void	ft_init_flags(t_flags *flags)
 {
 	if (!flags)
-	{
-		// Malloc??
-	}
+		return ;
 	flags->hash = 0;
 	flags->zero = 0;
 	flags->minus = 0;
 	flags->plus = 0;
 	flags->space = 0;
+	flags->width = 0;
+	flags->precision = 0;
+}
+
+static t_flags	*ft_create_flags(void)
+{
+	t_flags *flags;
+
+	if (!(flags = (t_flags*)malloc(sizeof(t_flags))))
+		return (NULL);
+	ft_init_flags(flags);
+	return (flags);
+}
+
+static void	ft_parse_flags(char **fstr, t_flags *flags)
+{
+	bool	is_parsing;
+
+	is_parsing = true;
+	while (is_parsing)
+	{
+		if (*(*fstr) == '#')
+			flags->hash = true;
+		else if (*(*fstr) == '0')
+			flags->zero = true;
+		else if (*(*fstr) == '-')
+			flags->minus = true;
+		else if (*(*fstr) == '+')
+			flags->plus = true;
+		else if (*(*fstr) == ' ')
+			flags->space = true;
+		else
+		{
+			is_parsing = false;
+			break ;
+		}
+		(*fstr)++;
+	}
+}
+
+static void	ft_parse_width(char **fstr, t_flags *flags)
+{
+	if (ft_isdigit(*(*fstr)))
+	{
+		flags->width = ft_atoi(*fstr);
+	}
+	(*fstr) += ft_ndigits(flags->width);
+}
+
+static void	ft_parse_precision(char **fstr, t_flags *flags)
+{
+	if (*(*fstr) == '.')
+	{
+		(*fstr)++;
+		flags->precision = ft_atoi(*fstr);
+	}
+	(*fstr) += ft_ndigits(flags->precision);
 }
 
 int			ft_printf(const char *format,  ...)
 {
-	int				i;
 	va_list			valist;
 	char			*fstr;
-	int				len;
-	bool			parsing_flags;
+
 	t_flags			*flags;
 
+	if (!(flags = ft_create_flags()))
+		return (-1);
 	fstr = (char*)format;
 	va_start(valist, format);
 
-	flags = (t_flags*)malloc(sizeof(t_flags));
-
-	len = ft_strlen(format);
-	i = 0;
-	parsing_flags = true;
 	while (*fstr != '\0')
 	{
 		if (*fstr == '%')
 		{
 			fstr++;
-			/*
-			** Parse flags first
-			*/
 			ft_init_flags(flags);
-			while (parsing_flags)
-			{
-				if (*fstr == '#') { flags->hash = true; fstr++; }
-				else if (*fstr == '0') { flags->zero = true; fstr++; }
-				else if (*fstr == '-') { flags->minus = true; fstr++; }
-				else if (*fstr == '+') { flags->plus = true; fstr++; }
-				else if (*fstr == ' ') { flags->space = true; fstr++; }
-				else { parsing_flags = false; }
-			}
-
+			ft_parse_flags(&fstr, flags);
+			ft_parse_width(&fstr, flags);
+			ft_parse_precision(&fstr, flags);
 			if (*fstr == 'c')
 			{
 				int value = va_arg(valist, int);

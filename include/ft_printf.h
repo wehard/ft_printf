@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/28 18:54:52 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 12:35:20 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define BASE16UP "0123456789ABCDEF"
 # define BASE8 "01234567"
 # define BASE2 "01"
+# define SPACE ' '
 
 typedef struct s_flags
 {
@@ -34,6 +35,7 @@ typedef struct s_flags
 void	ft_putnbr_uintmax_t(uintmax_t n);
 void	ft_putnbr_base_uintmax_t(uintmax_t n, int base, char *digits);
 char	*ft_itoa_base_uintmax_t(uintmax_t n, char *digits);
+int		ft_ndigits_base_uintmax_t(uintmax_t n, int base);
 
 void	ft_output_c(char c, t_flags *flags);
 void	ft_output_s(char *s, t_flags *flags);
