@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 15:05:20 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 15:29:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void	ft_handle_o(int n, t_flags *flags);
 void	ft_handle_u(unsigned int n, t_flags *flags);
 void	ft_handle_x_low(unsigned int n, t_flags *flags);
 void	ft_handle_x_up(unsigned int n, t_flags *flags);
+void	ft_handle_f(double d, t_flags *flags);
 
 #endif

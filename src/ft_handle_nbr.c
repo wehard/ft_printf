@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 15:11:14 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:01:39 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,19 @@ void	ft_handle_x_low(unsigned int n, t_flags *flags)
 void	ft_handle_x_up(unsigned int n, t_flags *flags)
 {
 	ft_putstr(ft_itoa_base(n, BASE16UP));
+}
+
+void	ft_handle_f(double d, t_flags *flags)
+{
+	int 	dec;
+	double	frac;
+
+	frac = d;
+	dec = (int)d;
+	frac -= dec;
+	ft_putnbr(dec);
+	ft_outchar(".", 1);
+	frac *= 1000000;
+	dec = (int)frac;
+	ft_outchar(ft_itoa(dec), ft_ndigits(dec));
 }

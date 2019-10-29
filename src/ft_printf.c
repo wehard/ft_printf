@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 15:09:16 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 15:28:58 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,50 +120,26 @@ int			ft_printf(const char *format,  ...)
 			ft_parse_width(&fstr, flags);
 			ft_parse_precision(&fstr, flags);
 			if (*fstr == 'c')
-			{
-				int value = va_arg(valist, int);
-				ft_handle_c(value, flags);
-			}
+				ft_handle_c(va_arg(valist, int), flags);
 			if (*fstr == 's')
-			{
-				char *value = va_arg(valist, char *);
-				ft_handle_s(value, flags);
-			}
+				ft_handle_s(va_arg(valist, char *), flags);
 			if (*fstr == 'p')
 			{
 				void *value = va_arg(valist, void *);
 				ft_handle_p(*(uintmax_t*)&value, flags);
 			}
-			if (*fstr == 'd')
-			{
-				int i = va_arg(valist, int);
-				ft_handle_di(i, flags);
-			}
-			if (*fstr == 'i')
-			{
-				int i = va_arg(valist, int);
-				ft_handle_di(i, flags);
-			}
+			if (*fstr == 'd' || (*fstr == 'i'))
+				ft_handle_di(va_arg(valist, int), flags);
 			if (*fstr == 'o')
-			{
-				int i = va_arg(valist, int);
-				ft_handle_o(i, flags);
-			}
+				ft_handle_o(va_arg(valist, int), flags);
 			if (*fstr == 'u')
-			{
-				unsigned int i = va_arg(valist, unsigned int);
-				ft_handle_u(i, flags);
-			}
+				ft_handle_u(va_arg(valist, unsigned int), flags);
 			if (*fstr == 'x')
-			{
-				int a = va_arg(valist, unsigned int);
-				ft_handle_x_low(a, flags);
-			}
+				ft_handle_x_low(va_arg(valist, unsigned int), flags);
 			if (*fstr == 'X')
-			{
-				int a = va_arg(valist, unsigned int);
-				ft_handle_x_up(a, flags);
-			}
+				ft_handle_x_up(va_arg(valist, unsigned int), flags);
+			if (*fstr == 'f')
+				ft_handle_f(va_arg(valist, double), flags);
 		}
 		else
 		{
