@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 17:48:22 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 22:50:12 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_init_flags(t_flags *flags)
 	flags->space = 0;
 	flags->width = 0;
 	flags->precision = 6;
+	flags->bytes = 0;
 }
 
 void	ft_parse_flags(char **fstr, t_flags *flags)

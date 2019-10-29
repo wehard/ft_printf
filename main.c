@@ -6,11 +6,14 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 17:19:28 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 23:21:51 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <stdio.h>
+#include "ft_printf.h"
+#include "libft.h"
 
 int	ft_printf(const char *format, ...);
 
@@ -27,8 +30,8 @@ int	main(void)
 	printf("%10s World: %c\n", "Hello", 'x');
 	ft_printf("ft_printf p:%30p\n", &p);
 	printf("   printf p:%30p\n", &p);
-	ft_printf("ft_printf di: %10d\n", 42);
-	printf("   printf di: %10d\n", 42);
+	ft_printf("ft_printf di: %+05d\n", INT32_MIN);
+	printf("   printf di: %+05d\n", INT32_MIN);
 
 	// hex
 	int h = 2147483647;
@@ -46,6 +49,14 @@ int	main(void)
 	double d = 1234.56789;
 	ft_printf("ft_printf f: %.3f\n", d);
 	printf("   printf f: %.3f\n", d);
+	printf("\n");
+
+	int l1 = ft_printf("%10s\n", "hello");
+	int l2 = printf("%10s\n", "hello");
+
+	ft_printf("\n\n");
+	ft_printf("ft_printf %d", l1);
+	ft_printf("   printf %d", l2);
 
 	//printf("Octal (377): %o\n", 255);
 	//printf("%s World: %x %p", "Hello", 15, &p);
@@ -61,6 +72,5 @@ int	main(void)
 	//printf("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
 	//printf("Width trick: %*d \n", 5, 10);
 	//printf("%s \n", "A string");
-
 	return (0);
 }

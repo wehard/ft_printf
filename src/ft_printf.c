@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 17:45:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 23:16:47 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@
 
 int	ft_printf(const char *format, ...)
 {
-	va_list			valist;
-	char			*fstr;
-	t_flags			*flags;
+	va_list		valist;
+	char		*fstr;
+	t_flags		*flags;
+	int			bytes;
 
 	if (!(flags = ft_create_flags()))
 		return (-1);
 	fstr = (char*)format;
+	bytes = 0;
 	va_start(valist, format);
 	while (*fstr != '\0')
 	{
@@ -50,11 +52,11 @@ int	ft_printf(const char *format, ...)
 			ft_parse_precision(&fstr, flags);
 
 			if (*fstr == '%')
-				ft_putchar('%');
+				ft_outchar("%", 1);
 			if (*fstr == 'c')
 				ft_handle_c(va_arg(valist, int), flags);
 			if (*fstr == 's')
-				ft_handle_s(va_arg(valist, char *), flags);
+				bytes += ft_handle_s(va_arg(valist, char *), flags);
 			if (*fstr == 'p')
 			{
 				void *value = va_arg(valist, void *);
@@ -76,10 +78,11 @@ int	ft_printf(const char *format, ...)
 		else
 		{
 			ft_putchar(*fstr);
+			bytes++;
 		}
 		fstr++;
 	}
 	va_end(valist);
 	free(flags);
-	return (0);
+	return (bytes);
 }

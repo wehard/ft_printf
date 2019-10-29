@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/10/29 16:42:45 by wkorande         ###   ########.fr        #
+#    Updated: 2019/10/29 22:44:19 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ $(NAME):
 
 test: re
 	@printf "\033[33m%s\n\033[34m" "Making test"
-	@gcc -o test main.c -I include  -L. -lftprintf
+	@gcc -g -o test main.c -I $(INCLDIR) -I $(LIBFTDIR)/includes  -L. -lftprintf
 
 clean:
 	@printf "\033[1;30m"
