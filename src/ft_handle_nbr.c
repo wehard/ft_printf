@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 16:40:49 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 17:26:11 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,27 @@ void	ft_handle_o(int n, t_flags *flags)
 
 void	ft_handle_u(unsigned int n, t_flags *flags)
 {
-	ft_putnbr(n);
+	ft_apply_width(flags, ft_strlen(ft_itoa(n)), &ft_outchar, ft_itoa(n));
 }
 
 void	ft_handle_x_low(unsigned int n, t_flags *flags)
 {
-	ft_putstr(ft_itoa_base(n, BASE16LOW));
+	char *s;
+	if (flags->hash)
+		s = ft_strjoin("0x", ft_itoa_base(n, BASE16LOW));
+	else
+		s = ft_itoa_base(n, BASE16LOW);
+	ft_apply_width(flags, ft_strlen(s), &ft_outchar, s);
 }
 
 void	ft_handle_x_up(unsigned int n, t_flags *flags)
 {
-	ft_putstr(ft_itoa_base(n, BASE16UP));
+	char *s;
+	if (flags->hash)
+		s = ft_strjoin("0x", ft_itoa_base(n, BASE16UP));
+	else
+		s = ft_itoa_base(n, BASE16UP);
+	ft_apply_width(flags, ft_strlen(s), &ft_outchar, s);
 }
 
 void	ft_handle_f(double d, t_flags *flags)

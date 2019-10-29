@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 16:42:00 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 17:19:28 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,16 @@ int	main(void)
 	printf("   printf p:%30p\n", &p);
 	ft_printf("ft_printf di: %10d\n", 42);
 	printf("   printf di: %10d\n", 42);
-	//ft_printf("Hex (ff): %x\n", 255);
-	//ft_printf("Hex (FF): %X\n", 255);
+
+	// hex
+	int h = 2147483647;
+	char *f = "hex (ff FF): [%#5x] [%#5X]\n";
+	ft_printf("%10s", "ft_printf:");
+	ft_printf(f, h, h);
+	printf("%10s", "printf:");
+	printf(f, h, h);
+
+
 	ft_printf("ft_printf o (377): %15o\n", 255);
 	printf("   printf o (377): %15o\n", 255);
 

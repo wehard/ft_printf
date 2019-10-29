@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:25:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 14:26:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 17:21:39 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void	ft_handle_s(char *s, t_flags *flags)
 void	ft_handle_p(uintmax_t p, t_flags *flags)
 {
 	char *pstr;
-	char *pf;
 
-	pf = "0x";
-	pstr = ft_strjoin(pf, ft_itoa_base_uintmax_t(p, BASE16LOW));
+	pstr = ft_strjoin("0x", ft_itoa_base_uintmax_t(p, BASE16LOW));
 	ft_apply_width(flags, ft_strlen(pstr), &ft_outchar, pstr);
 }

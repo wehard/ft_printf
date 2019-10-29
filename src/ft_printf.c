@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 16:36:00 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/29 17:22:46 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_init_flags(t_flags *flags)
 	flags->plus = 0;
 	flags->space = 0;
 	flags->width = 0;
-	flags->precision = 6;
+	flags->precision = 6; // ?
 }
 
 static t_flags	*ft_create_flags(void)
