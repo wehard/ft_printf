@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/30 11:59:10 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/30 17:47:51 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 
 # include <stdlib.h>
+# include <stdarg.h>
 # include "stdint.h"
 
 # define BASE16LOW "0123456789abcdef"
@@ -23,7 +24,7 @@
 # define SPACE ' '
 # define ZERO '0'
 
-typedef struct s_flags
+typedef struct	s_flags
 {
 	int			hash;
 	int			zero;
@@ -35,6 +36,14 @@ typedef struct s_flags
 	int			length;
 	int			bytes;
 }				t_flags;
+
+typedef int		(*t_s_func)(va_list, t_flags);
+
+typedef struct	s_sp_type
+{
+	char		c;
+	t_s_func	func;
+}				t_sp_type;
 
 void	ft_putnbr_uintmax_t(uintmax_t n);
 void	ft_putnbr_base_uintmax_t(uintmax_t n, int base, char *digits);
@@ -54,7 +63,7 @@ void	ft_apply_width(t_flags *flags, int len, void (*out_func)(const char *, int)
 ** Handle strings and chars
 */
 
-int		ft_handle_c(char c, t_flags *flags);
+int		ft_handle_c(va_list valist, t_flags *flags);
 int		ft_handle_s(char *s, t_flags *flags);
 
 /*
@@ -73,5 +82,15 @@ int		ft_handle_f(double d, t_flags *flags);
 int		ft_handle_p(uintmax_t p, t_flags *flags);
 int		ft_handle_x_low(unsigned int n, t_flags *flags);
 int		ft_handle_x_up(unsigned int n, t_flags *flags);
+
+/*
+** va_arg helpers
+*/
+
+int				ft_get_va_arg_int(va_list *valist);
+unsigned int	ft_get_va_arg_uint(va_list *valist);
+double			ft_get_va_arg_double(va_list *valist);
+char			*ft_get_va_arg_cstr(va_list *valist);
+uintmax_t		ft_get_va_arg_pointer(va_list *valist);
 
 #endif

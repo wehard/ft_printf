@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/30 12:13:06 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/30 17:37:36 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,44 +19,45 @@ int	ft_printf(const char *format, ...);
 
 int	main(void)
 {
-	char c = 'a';
-	int *p;
-	int a;
-	a = 55;
-	p = &a;
+	ft_printf("%c", 'x');
+	//char c = 'a';
+	//int *p;
+	//int a;
+	//a = 55;
+	//p = &a;
 	//char *str = "%cWorld";
 	//printf("%-20s%s", "printf", "ft_printf");
-	ft_printf("%10s World: %c\n", "Hello", 'x');
-	printf("%10s World: %c\n", "Hello", 'x');
-	ft_printf("ft_printf p:%30p\n", &p);
-	printf("   printf p:%30p\n", &p);
-	ft_printf("ft_printf di: %+05d\n", INT32_MIN);
-	printf("   printf di: %+05d\n", INT32_MIN);
+	//ft_printf("%10s World: %c\n", "Hello", 'x');
+	//printf("%10s World: %c\n", "Hello", 'x');
+	//ft_printf("ft_printf p:%30p\n", &p);
+	//printf("   printf p:%30p\n", &p);
+	//ft_printf("ft_printf di: %+05d\n", 55);
+	//printf("   printf di: %+05d\n", 55);
 
 	// hex
-	int h = 2147483647;
-	char *f = "hex (ff FF): [%#5x] [%#5X]\n";
-	ft_printf("%10s", "ft_printf:");
-	ft_printf(f, h, h);
-	printf("%10s", "printf:");
-	printf(f, h, h);
+	//int h = 2147483647;
+	//char *f = "hex (ff FF): [%#5x] [%#5X]\n";
+	//ft_printf("%10s", "ft_printf:");
+	//ft_printf(f, h, h);
+	//printf("%10s", "printf:");
+	//printf(f, h, h);
 
 
-	ft_printf("ft_printf o (377): %15o\n", 255);
-	printf("   printf o (377): %15o\n", 255);
+	//ft_printf("ft_printf o (377): %15o\n", 255);
+	//printf("   printf o (377): %15o\n", 255);
 
 	// Float
-	double d = 1234.56789;
-	ft_printf("ft_printf f: %-50.3f\n", d);
-	printf("   printf f: %-50.3f\n", d);
-	printf("\n");
+	//double d = 1234.56789;
+	//ft_printf("ft_printf f: %-50.3f\n", d);
+	//printf("   printf f: %-50.3f\n", d);
+	//printf("\n");
 
-	int l1 = ft_printf("%10s\n", "hello");
-	int l2 = printf("%10s\n", "hello");
+	//int l1 = ft_printf("%10s\n", "hello");
+	//int l2 = printf("%10s\n", "hello");
 
-	ft_printf("\n\n");
-	ft_printf("ft_printf %d", l1);
-	ft_printf("   printf %d", l2);
+	//ft_printf("\n\n");
+	//ft_printf("ft_printf %d", l1);
+	//ft_printf("   printf %d", l2);
 
 	//ft_printf("\n\n");
 	//ft_printf("%s", ft_dtoa(-3.1456, 2));

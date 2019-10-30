@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/30 11:53:52 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/30 17:48:18 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,37 @@
 **
 ** %[flags][width][.precision][length]specifier
 */
+
+#define N_TYPES 9
+
+t_sp_type g_typetab[N_TYPES] =
+{
+	{'c', &ft_handle_c},
+	{'s', &ft_handle_s},
+	{'p', &ft_handle_p},
+	{'d', &ft_handle_di},
+	{'i', &ft_handle_di},
+	{'o', &ft_handle_o},
+	{'u', &ft_handle_u},
+	{'x', &ft_handle_x_low},
+	{'X', &ft_handle_x_up}
+};
+
+static int	ft_select_type(va_list valist, char c, t_flags *flags)
+{
+	int i;
+
+	i = 0;
+	while (i < N_TYPES)
+	{
+		if (g_typetab[i].c == c)
+		{
+			g_typetab[i].func(valist, *flags);
+		}
+		i++;
+	}
+
+}
 
 int	ft_printf(const char *format, ...)
 {
@@ -53,27 +84,23 @@ int	ft_printf(const char *format, ...)
 
 			if (*fstr == '%')
 				ft_outchar("%", 1);
-			if (*fstr == 'c')
-				ft_handle_c(va_arg(valist, int), flags);
-			if (*fstr == 's')
-				bytes += ft_handle_s(va_arg(valist, char *), flags);
-			if (*fstr == 'p')
+			else
 			{
-				void *value = va_arg(valist, void *);
-				ft_handle_p(*(uintmax_t*)&value, flags);
+				ft_select_type(valist, *fstr, flags);
+
 			}
-			if (*fstr == 'd' || (*fstr == 'i'))
-				ft_handle_di(va_arg(valist, int), flags);
-			if (*fstr == 'o')
-				ft_handle_o(va_arg(valist, int), flags);
-			if (*fstr == 'u')
-				ft_handle_u(va_arg(valist, unsigned int), flags);
-			if (*fstr == 'x')
-				ft_handle_x_low(va_arg(valist, unsigned int), flags);
-			if (*fstr == 'X')
-				ft_handle_x_up(va_arg(valist, unsigned int), flags);
+			/* if (*fstr == 'c')
+				ft_handle_c(ft_get_va_arg_int(valist), flags);
+			if (*fstr == 's')
+				bytes += ft_handle_s(ft_get_va_arg_cstr(valist), flags);
+			if (*fstr == 'p')
+				ft_handle_p(ft_get_va_arg_pointer(valist), flags);
+			if ((*fstr == 'd') || (*fstr == 'i') || (*fstr == 'o'))
+				ft_handle_di(ft_get_va_arg_int(valist), flags);
+			if (*fstr == 'u' || (*fstr == 'x') || (*fstr == 'X'))
+				ft_handle_u(ft_get_va_arg_uint(valist), flags);
 			if (*fstr == 'f')
-				ft_handle_f(va_arg(valist, double), flags);
+				ft_handle_f(ft_get_va_arg_double(valist), flags); */
 		}
 		else
 		{
