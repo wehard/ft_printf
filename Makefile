@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/10/29 22:44:19 by wkorande         ###   ########.fr        #
+#    Updated: 2019/10/30 11:49:18 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ FLAGS = #-Wall -Wextra -Werror
 SRC = 	ft_printf.c\
 		ft_handle_str.c\
 		ft_handle_nbr.c\
+		ft_handle_other.c\
 		ft_putnbr_uintmax_t.c\
 		ft_putnbr_base_uintmax_t.c\
 		ft_itoa_base_uintmax_t.c\
