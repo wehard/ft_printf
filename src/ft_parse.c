@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_format.c                                        :+:      :+:    :+:   */
+/*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 22:50:12 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 16:14:46 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	ft_init_flags(t_flags *flags)
 	flags->plus = 0;
 	flags->space = 0;
 	flags->width = 0;
-	flags->precision = 6;
+	flags->precision = 0;
 	flags->bytes = 0;
+	flags->prefix = NULL;
+	flags->prefixlen = 0;
 }
 
 void	ft_parse_flags(char **fstr, t_flags *flags)

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 12:02:00 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 16:14:09 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct	s_flags
 	int			precision;
 	int			length;
 	int			bytes;
+	char		*prefix;
+	int			prefixlen;
 }				t_flags;
 
 typedef int		(*t_s_func)(va_list, t_flags *);
@@ -57,7 +59,7 @@ void	ft_parse_width(char **fstr, t_flags *flags);
 void	ft_parse_precision(char **fstr, t_flags *flags);
 
 int		ft_outchar(const char *data, int len);
-void	ft_apply_width(t_flags *flags, int len, int (*out_func)(const char *, int), void *data);
+int		ft_format_output(t_flags *flags, char *data, int len);
 
 /*
 ** Handle strings and chars

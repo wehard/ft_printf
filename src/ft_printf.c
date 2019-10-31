@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 12:19:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 13:56:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	ft_output_type(va_list valist, char c, t_flags *flags)
 	return (flags->bytes);
 }
 
-void		ft_parse_specifier(char **fstr, t_flags *flags)
+void		ft_parse_specifier_flags(char **fstr, t_flags *flags)
 {
 	ft_init_flags(flags);
 	ft_parse_flags(fstr, flags);
@@ -84,7 +84,7 @@ int			ft_printf(const char *format, ...)
 		if (*fstr == '%')
 		{
 			fstr++;
-			ft_parse_specifier(&fstr, flags);
+			ft_parse_specifier_flags(&fstr, flags);
 			if (*fstr == '%')
 				ft_outchar("%", 1);
 			else

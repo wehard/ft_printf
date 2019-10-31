@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 12:22:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 16:10:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,20 @@ int	main(void)
 	a = 10;
 	ptr = &a;
 
-	ft_printf("%10s %c\n", "char", 'x');
-	ft_printf("%10s %s\n", "string", "hello");
+	ft_printf("\033[22;34mHello, \033[22;33mworld!\033[0m\n");
+	//ft_printf("%10s %c\n", "char", 'x');
+	ft_printf("%10s %20.3s\n", "string", "hello");
+	printf("%10s %20.3s\n", "std", "hello");
 	ft_printf("%10s %05d %05i\n", "int", 42, 1234);
 	ft_printf("%10s %o\n", "octal", 255);
 	ft_printf("%10s %u\n", "uint", 42);
 	ft_printf("%10s %.4f\n", "float.4", 3.141592);
 
 	ft_printf("%10s %p\n", "pointer", ptr);
-	ft_printf("%10s %x\n", "hex", INT32_MAX);
-	ft_printf("%10s %X\n", "HEX", INT32_MAX);
+	ft_printf("%10s %#x\n", "hex", INT32_MAX);
+	ft_printf("%10s %#X\n", "HEX", INT32_MAX);
+	ft_printf("%+10d\n", 10);
+	printf("%+10d\n", 10);
 	//char c = 'a';
 	//int *p;
 	//int a;
@@ -91,6 +95,5 @@ int	main(void)
 	//printf("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
 	//printf("Width trick: %*d \n", 5, 10);
 	//printf("%s \n", "A string");
-	//while (1);
 	return (0);
 }

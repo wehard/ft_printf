@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 12:00:05 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 16:15:16 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,31 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-void	ft_apply_width(t_flags *flags, int len,\
-						int (*out_func)(const char *, int), void *data)
+int		ft_format_output(t_flags *flags, char *data, int len)
 {
 	int spaces;
 
-	spaces = flags->width - len;
+	spaces = flags->width - len - flags->prefixlen;
 	if (flags->minus)
 	{
-		out_func(data, len);
+		if (flags->plus)
+		{
+			ft_outchar(flags->prefix, flags->prefixlen);
+			spaces--;
+		}
+		ft_outchar(data, len);
 		while (spaces-- > 0)
 			ft_putchar(SPACE);
 	}
 	else
 	{
 		while (spaces-- > 0)
-		{
 			flags->zero ? ft_putchar(ZERO) : ft_putchar(SPACE);
-		}
-		out_func(data, len);
+		if (flags->hash || flags->plus)
+			ft_outchar(flags->prefix, flags->prefixlen);
+		ft_outchar(data, len);
 	}
+	return (spaces + len);
 }
 
 int		ft_outchar(const char *data, int len)
