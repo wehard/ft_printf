@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 16:16:15 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 16:35:39 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	ft_handle_di(va_list valist, t_flags *flags)
 	if (flags->plus && n > 0)
 	{
 		flags->prefix = "+";
+		flags->prefixlen = 1;
+	}
+	else if (n > 0 && flags->space)
+	{
+		flags->prefix = " ";
 		flags->prefixlen = 1;
 	}
 	str = ft_itoa(n);

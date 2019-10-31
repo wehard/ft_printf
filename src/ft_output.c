@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 16:15:16 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 16:36:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ int		ft_format_output(t_flags *flags, char *data, int len)
 	spaces = flags->width - len - flags->prefixlen;
 	if (flags->minus)
 	{
-		if (flags->plus)
-		{
+		if (flags->plus || flags->space)
 			ft_outchar(flags->prefix, flags->prefixlen);
-			spaces--;
-		}
 		ft_outchar(data, len);
 		while (spaces-- > 0)
 			ft_putchar(SPACE);
