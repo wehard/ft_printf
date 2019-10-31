@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/29 17:47:08 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 12:00:05 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "ft_printf.h"
 
 void	ft_apply_width(t_flags *flags, int len,\
-						void (*out_func)(const char *, int), void *data)
+						int (*out_func)(const char *, int), void *data)
 {
 	int spaces;
 
@@ -36,7 +36,8 @@ void	ft_apply_width(t_flags *flags, int len,\
 	}
 }
 
-void	ft_outchar(const char *data, int len)
+int		ft_outchar(const char *data, int len)
 {
 	write(1, data, len);
+	return (len);
 }

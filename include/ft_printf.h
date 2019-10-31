@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 10:56:13 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 12:02:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef int		(*t_s_func)(va_list, t_flags *);
 typedef struct	s_sp_type
 {
 	char		c;
-	t_s_func	func;
+	t_s_func	output_func;
 }				t_sp_type;
 
 void	ft_putnbr_uintmax_t(uintmax_t n);
@@ -56,8 +56,8 @@ void	ft_parse_flags(char **fstr, t_flags *flags);
 void	ft_parse_width(char **fstr, t_flags *flags);
 void	ft_parse_precision(char **fstr, t_flags *flags);
 
-void	ft_outchar(const char *data, int len);
-void	ft_apply_width(t_flags *flags, int len, void (*out_func)(const char *, int), void *data);
+int		ft_outchar(const char *data, int len);
+void	ft_apply_width(t_flags *flags, int len, int (*out_func)(const char *, int), void *data);
 
 /*
 ** Handle strings and chars

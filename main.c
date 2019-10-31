@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 11:29:06 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 12:22:37 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	main(void)
 
 	ft_printf("%10s %c\n", "char", 'x');
 	ft_printf("%10s %s\n", "string", "hello");
-	ft_printf("%10s %d %i\n", "int", 42, 1234);
+	ft_printf("%10s %05d %05i\n", "int", 42, 1234);
 	ft_printf("%10s %o\n", "octal", 255);
 	ft_printf("%10s %u\n", "uint", 42);
-	ft_printf("%10s %.2f\n", "float.2", 3.14);
+	ft_printf("%10s %.4f\n", "float.4", 3.141592);
 
 	ft_printf("%10s %p\n", "pointer", ptr);
 	ft_printf("%10s %x\n", "hex", INT32_MAX);
