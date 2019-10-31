@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 10:53:54 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 11:28:53 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	ft_select_type(va_list valist, char c, t_flags *flags)
 	return (flags->bytes);
 }
 
-int	ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	va_list		valist;
 	char		*fstr;

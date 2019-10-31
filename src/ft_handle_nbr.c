@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 10:51:27 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 11:17:06 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	ft_handle_di(va_list valist, t_flags *flags)
 	else
 		s = ft_itoa(n);
 	ft_apply_width(flags, ft_strlen(s), &ft_outchar, s);
+	free(s);
 	return (1);
 }
 
@@ -35,15 +36,19 @@ int	ft_handle_o(va_list valist, t_flags *flags)
 	n = va_arg(valist, int);
 	str = ft_itoa_base(n, BASE8);
 	ft_apply_width(flags, ft_strlen(str), &ft_outchar, str);
+	free(str);
 	return (1);
 }
 
 int	ft_handle_u(va_list valist, t_flags *flags)
 {
-	unsigned int n;
+	char			*str;
+	unsigned int	n;
 
 	n = va_arg(valist, unsigned int);
-	ft_apply_width(flags, ft_strlen(ft_itoa(n)), &ft_outchar, ft_itoa(n));
+	str = ft_itoa(n);
+	ft_apply_width(flags, ft_strlen(str), &ft_outchar, str);
+	free(str);
 	return (1);
 }
 
@@ -55,5 +60,6 @@ int	ft_handle_f(va_list valist, t_flags *flags)
 	d = va_arg(valist, double);
 	str = ft_dtoa(d, flags->precision);
 	ft_apply_width(flags, ft_strlen(str), &ft_outchar, str);
+	free(str);
 	return (1);
 }
