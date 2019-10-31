@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/30 17:37:36 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 10:52:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ int	ft_printf(const char *format, ...);
 
 int	main(void)
 {
-	ft_printf("%c", 'x');
+	ft_printf("char %c\n", 'x');
+	ft_printf("string %s\n", "string");
+	ft_printf("int %d %i\n", 42, 1234);
+	ft_printf("octal %o\n", 255);
+	ft_printf("uint %u\n", 42);
+	ft_printf("float.2 %.2f\n", 3.14);
 	//char c = 'a';
 	//int *p;
 	//int a;

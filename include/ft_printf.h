@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/30 17:47:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/10/31 10:56:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct	s_flags
 	int			bytes;
 }				t_flags;
 
-typedef int		(*t_s_func)(va_list, t_flags);
+typedef int		(*t_s_func)(va_list, t_flags *);
 
 typedef struct	s_sp_type
 {
@@ -64,33 +64,33 @@ void	ft_apply_width(t_flags *flags, int len, void (*out_func)(const char *, int)
 */
 
 int		ft_handle_c(va_list valist, t_flags *flags);
-int		ft_handle_s(char *s, t_flags *flags);
+int		ft_handle_s(va_list valist, t_flags *flags);
 
 /*
 ** Handle numbers
 */
 
-int		ft_handle_di(int n, t_flags *flags);
-int		ft_handle_o(int n, t_flags *flags);
-int		ft_handle_u(unsigned int n, t_flags *flags);
-int		ft_handle_f(double d, t_flags *flags);
+int		ft_handle_di(va_list valist, t_flags *flags);
+int		ft_handle_o(va_list valist, t_flags *flags);
+int		ft_handle_u(va_list valist, t_flags *flags);
+int		ft_handle_f(va_list valist, t_flags *flags);
 
 /*
 ** Handle others (pointer and hex conversion)
 */
 
-int		ft_handle_p(uintmax_t p, t_flags *flags);
-int		ft_handle_x_low(unsigned int n, t_flags *flags);
-int		ft_handle_x_up(unsigned int n, t_flags *flags);
+int		ft_handle_p(va_list valist, t_flags *flags);
+int		ft_handle_x_low(va_list valist, t_flags *flags);
+int		ft_handle_x_up(va_list valist, t_flags *flags);
 
 /*
 ** va_arg helpers
 */
 
-int				ft_get_va_arg_int(va_list *valist);
-unsigned int	ft_get_va_arg_uint(va_list *valist);
-double			ft_get_va_arg_double(va_list *valist);
-char			*ft_get_va_arg_cstr(va_list *valist);
-uintmax_t		ft_get_va_arg_pointer(va_list *valist);
+int				ft_get_va_arg_int(va_list valist);
+unsigned int	ft_get_va_arg_uint(va_list valist);
+double			ft_get_va_arg_double(va_list valist);
+char			*ft_get_va_arg_cstr(va_list valist);
+uintmax_t		ft_get_va_arg_pointer(va_list valist);
 
 #endif
