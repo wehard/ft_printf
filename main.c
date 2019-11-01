@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 13:04:55 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/01 14:25:16 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,30 @@ int	main(void)
 	a = 10;
 	ptr = &a;
 
-	ft_printf("\033[22;34mHello, \033[22;33mworld!\033[0m\n");
-	ft_printf("%10s %c\n", "char", 'x');
-	ft_printf("%10s %20.3s\n", "string", "hello");
-	printf("%10s %20.3s\n", "std", "hello");
-	ft_printf("%10s %05d %05i\n", "int", 42, 1234);
+	ft_printf("\033[22;34m\n");
+	printf("Characters: %c %c \n", 'a', 65);
+	printf("Decimals: %d %ld\n", 1977, 650000L);
+	printf("Preceding with blanks: %10d \n", 1977);
+	printf("Preceding with zeros: %010d \n", 1977);
+	printf("Some different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
+	printf("floats: %4.2f %.6f \n", 3.1416, 3.1416);
+	printf("Width trick: %*d \n", 5, 10);
+	printf("%s \n", "A string");
+	ft_printf("\033[22;33m\n");
+	ft_printf("Characters: %c %c \n", 'a', 65);
+	ft_printf("Decimals: %d %ld\n", 1977, 650000L);
+	ft_printf("Preceding with blanks: %10d \n", 1977);
+	ft_printf("Preceding with zeros: %010d \n", 1977);
+	ft_printf("Some different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
+	ft_printf("floats: %4.2f %.6f \n", 3.1416, 3.1416);
+	ft_printf("Width trick: %*d \n", 5, 10);
+	ft_printf("%s \n", "A string");
+
+	//ft_printf("\033[22;34mHello, \033[22;33mworld!\033[0m\n");
+	//ft_printf("%10s %c\n", "char", 'x');
+	//ft_printf("%10s %20.3s\n", "string", "hello");
+	//printf("%10s %20.3s\n", "std", "hello");
+	//ft_printf("%10s %05d %05i\n", "int", 42, 1234);
 	//ft_printf("%10s %o\n", "octal", 255);
 	//ft_printf("%10s %u\n", "uint", 42);
 	//ft_printf("%10s %.4f\n", "float.4", 3.141592);

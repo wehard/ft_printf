@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 12:26:28 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/01 14:39:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,14 @@ void	ft_parse_flags(char **fstr, t_flags *flags)
 	}
 }
 
-void	ft_parse_width(char **fstr, t_flags *flags)
+void	ft_parse_width(char **fstr, t_flags *flags, va_list valist)
 {
+	if (*(*fstr) == '*')
+	{
+		flags->width = va_arg(valist, int);
+		(*fstr)++;
+		return ;
+	}
 	if (ft_isdigit(*(*fstr)))
 	{
 		flags->width = ft_atoi(*fstr);
@@ -74,7 +80,7 @@ void	ft_parse_width(char **fstr, t_flags *flags)
 	(*fstr) += ft_ndigits(flags->width);
 }
 
-void	ft_parse_precision(char **fstr, t_flags *flags)
+void	ft_parse_precision(char **fstr, t_flags *flags, va_list valist)
 {
 	if (*(*fstr) == '.')
 	{
@@ -83,6 +89,11 @@ void	ft_parse_precision(char **fstr, t_flags *flags)
 		{
 			flags->precision = ft_atoi(*fstr);
 			(*fstr) += ft_ndigits(flags->precision);
+		}
+		else if (*(*fstr) == '*')
+		{
+			flags->precision = va_arg(valist, int);
+			(*fstr)++;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 13:10:44 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/01 14:40:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ static int	ft_output_type(t_p_buf *dst, va_list valist, char c, t_flags *flags)
 	return (bytes);
 }
 
-static void	ft_parse_specifier_flags(char **fstr, t_flags *flags)
+static void	ft_parse_spec_flags(char **fstr, t_flags *flags, va_list valist)
 {
 	ft_init_flags(flags);
 	ft_parse_flags(fstr, flags);
-	ft_parse_width(fstr, flags);
-	ft_parse_precision(fstr, flags);
+	ft_parse_width(fstr, flags, valist);
+	ft_parse_precision(fstr, flags, valist);
 }
 
 static int	ft_vsprintf(t_p_buf *dest, const char *format, va_list valist)
@@ -83,7 +83,7 @@ static int	ft_vsprintf(t_p_buf *dest, const char *format, va_list valist)
 		if (*fstr == '%')
 		{
 			fstr++;
-			ft_parse_specifier_flags(&fstr, flags);
+			ft_parse_spec_flags(&fstr, flags, valist);
 			if (*fstr == '%')
 				ft_outchar_buf(dest, PERCENT, 1);
 			else
