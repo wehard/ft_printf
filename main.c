@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 16:07:02 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/01 16:08:40 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(void)
 	printf("%s \n", "A string");
 
 	SET_COLOR(YELLOW);
-	ft_printf("%s ft_printf:\n", YELLOW);
+	ft_printf("\nft_printf:\n");
 	ft_printf("Characters: %c %c \n", 'a', 65);
 	ft_printf("Decimals: %d %ld\n", 1977, 650000L);
 	ft_printf("Preceding with blanks: %10d \n", 1977);
