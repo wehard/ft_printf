@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 14:40:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/01 14:55:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static int	ft_vsprintf(t_p_buf *dest, const char *format, va_list valist)
 			ft_outchar_buf(dest, fstr, 1);
 		fstr++;
 	}
+	free(flags);
 	return (dest->at - dest->start);
 }
 

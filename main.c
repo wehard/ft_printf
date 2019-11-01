@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 14:25:16 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/01 16:07:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <stdio.h>
 #include "ft_printf.h"
 #include "libft.h"
+
+#define SET_COLOR(color) ft_printf(color)
+#define BLUE "\033[22;34m"
+#define YELLOW "\033[22;33m"
+#define BLACK "\033[30;107m"
+#define NORMAL "\033[0;0m"
 
 int	ft_printf(const char *format, ...);
 
@@ -25,7 +31,8 @@ int	main(void)
 	a = 10;
 	ptr = &a;
 
-	ft_printf("\033[22;34m\n");
+	SET_COLOR(BLUE);
+	ft_printf("printf:\n");
 	printf("Characters: %c %c \n", 'a', 65);
 	printf("Decimals: %d %ld\n", 1977, 650000L);
 	printf("Preceding with blanks: %10d \n", 1977);
@@ -34,7 +41,9 @@ int	main(void)
 	printf("floats: %4.2f %.6f \n", 3.1416, 3.1416);
 	printf("Width trick: %*d \n", 5, 10);
 	printf("%s \n", "A string");
-	ft_printf("\033[22;33m\n");
+
+	SET_COLOR(YELLOW);
+	ft_printf("%s ft_printf:\n", YELLOW);
 	ft_printf("Characters: %c %c \n", 'a', 65);
 	ft_printf("Decimals: %d %ld\n", 1977, 650000L);
 	ft_printf("Preceding with blanks: %10d \n", 1977);
@@ -43,6 +52,11 @@ int	main(void)
 	ft_printf("floats: %4.2f %.6f \n", 3.1416, 3.1416);
 	ft_printf("Width trick: %*d \n", 5, 10);
 	ft_printf("%s \n", "A string");
+
+	SET_COLOR(NORMAL);
+	ft_printf("\nflag test:\n");
+	ft_printf("%010i\n", 42);
+	ft_printf("%10s\n", "hello");
 
 	//ft_printf("\033[22;34mHello, \033[22;33mworld!\033[0m\n");
 	//ft_printf("%10s %c\n", "char", 'x');

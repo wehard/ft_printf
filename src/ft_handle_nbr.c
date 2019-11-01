@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 13:07:18 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/01 14:59:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	ft_handle_o(t_p_buf *dest, va_list valist, t_flags *flags)
 	int		n;
 	int		i;
 
+	flags->prefix = "0";
+	flags->prefixlen = 1;
 	n = va_arg(valist, int);
 	str = ft_itoa_base(n, BASE8);
 	i = ft_format_output(dest, flags, str, ft_strlen(str));
