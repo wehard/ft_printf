@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 11:35:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/01 13:05:57 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,21 @@
 # include <stdarg.h>
 # include "stdint.h"
 
+# define PRINT_BUFF_SIZE 1024
 # define BASE16LOW "0123456789abcdef"
 # define BASE16UP "0123456789ABCDEF"
 # define BASE8 "01234567"
 # define BASE2 "01"
-# define SPACE ' '
-# define ZERO '0'
+# define PERCENT "%"
+# define SPACE " "
+# define ZERO "0"
+
+typedef struct s_p_buff
+{
+	char		*start;
+	char		*at;
+	size_t		size;
+}				t_p_buf;
 
 typedef struct	s_flags
 {
@@ -34,12 +43,11 @@ typedef struct	s_flags
 	int			width;
 	int			precision;
 	int			length;
-	int			bytes;
 	char		*prefix;
 	int			prefixlen;
 }				t_flags;
 
-typedef int		(*t_s_func)(va_list, t_flags *);
+typedef int		(*t_s_func)(t_p_buf *, va_list, t_flags *);
 
 typedef struct	s_sp_type
 {
@@ -58,32 +66,33 @@ void	ft_parse_flags(char **fstr, t_flags *flags);
 void	ft_parse_width(char **fstr, t_flags *flags);
 void	ft_parse_precision(char **fstr, t_flags *flags);
 
-int		ft_outchar(const char *data, int len);
-int		ft_format_output(t_flags *flags, char *data, int len);
+//int		ft_outchar(const char *data, int len);
+int		ft_outchar_buf(t_p_buf *dest, const char *data, unsigned int len);
+int		ft_format_output(t_p_buf *dest, t_flags *flags, char *data, int len);
 
 /*
 ** Handle strings and chars
 */
 
-int		ft_handle_c(va_list valist, t_flags *flags);
-int		ft_handle_s(va_list valist, t_flags *flags);
+int		ft_handle_c(t_p_buf *dest, va_list valist, t_flags *flags);
+int		ft_handle_s(t_p_buf *dest, va_list valist, t_flags *flags);
 
 /*
 ** Handle numbers
 */
 
-int		ft_handle_di(va_list valist, t_flags *flags);
-int		ft_handle_o(va_list valist, t_flags *flags);
-int		ft_handle_u(va_list valist, t_flags *flags);
-int		ft_handle_f(va_list valist, t_flags *flags);
+int		ft_handle_di(t_p_buf *dest, va_list valist, t_flags *flags);
+int		ft_handle_o(t_p_buf *dest, va_list valist, t_flags *flags);
+int		ft_handle_u(t_p_buf *dest, va_list valist, t_flags *flags);
+int		ft_handle_f(t_p_buf *dest, va_list valist, t_flags *flags);
 
 /*
 ** Handle others (pointer and hex conversion)
 */
 
-int		ft_handle_p(va_list valist, t_flags *flags);
-int		ft_handle_x_low(va_list valist, t_flags *flags);
-int		ft_handle_x_up(va_list valist, t_flags *flags);
+int		ft_handle_p(t_p_buf *dest, va_list valist, t_flags *flags);
+int		ft_handle_x_low(t_p_buf *dest, va_list valist, t_flags *flags);
+int		ft_handle_x_up(t_p_buf *dest, va_list valist, t_flags *flags);
 
 
 #endif

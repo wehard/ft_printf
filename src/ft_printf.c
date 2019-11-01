@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 13:56:03 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/01 13:10:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,23 @@ t_sp_type g_output_types[N_HANDLERS] =
 	{'f', ft_handle_f}
 };
 
-static int	ft_output_type(va_list valist, char c, t_flags *flags)
+static int	ft_output_type(t_p_buf *dst, va_list valist, char c, t_flags *flags)
 {
 	int i;
+	int bytes;
 
+	bytes = 0;
 	i = 0;
 	while (i < N_HANDLERS)
 	{
 		if (g_output_types[i].c == c)
-			flags->bytes = g_output_types[i].output_func(valist, flags);
+			bytes = g_output_types[i].output_func(dst, valist, flags);
 		i++;
 	}
-	return (flags->bytes);
+	return (bytes);
 }
 
-void		ft_parse_specifier_flags(char **fstr, t_flags *flags)
+static void	ft_parse_specifier_flags(char **fstr, t_flags *flags)
 {
 	ft_init_flags(flags);
 	ft_parse_flags(fstr, flags);
@@ -67,18 +69,15 @@ void		ft_parse_specifier_flags(char **fstr, t_flags *flags)
 	ft_parse_precision(fstr, flags);
 }
 
-int			ft_printf(const char *format, ...)
+static int	ft_vsprintf(t_p_buf *dest, const char *format, va_list valist)
 {
-	va_list		valist;
-	char		*fstr;
 	t_flags		*flags;
+	char		*fstr;
 	int			bytes;
 
 	if (!(flags = ft_create_flags()))
 		return (-1);
 	fstr = (char*)format;
-	bytes = 0;
-	va_start(valist, format);
 	while (*fstr != '\0')
 	{
 		if (*fstr == '%')
@@ -86,15 +85,51 @@ int			ft_printf(const char *format, ...)
 			fstr++;
 			ft_parse_specifier_flags(&fstr, flags);
 			if (*fstr == '%')
-				ft_outchar("%", 1);
+				ft_outchar_buf(dest, PERCENT, 1);
 			else
-				bytes += ft_output_type(valist, *fstr, flags);
+				bytes += ft_output_type(dest, valist, *fstr, flags);
 		}
 		else
-			bytes += ft_outchar(fstr, 1);
+			ft_outchar_buf(dest, fstr, 1);
 		fstr++;
 	}
+	return (dest->at - dest->start);
+}
+
+int			ft_sprintf(char *dest, const char *format, ...)
+{
+	va_list	valist;
+	t_p_buf *pbuf;
+	int		bytes;
+
+	pbuf = (t_p_buf*)malloc(sizeof(t_p_buf));
+	pbuf->start = dest;
+	pbuf->at = dest;
+	pbuf->size = 0;
+	va_start(valist, format);
+	bytes = ft_vsprintf(pbuf, format, valist);
 	va_end(valist);
-	free(flags);
+	free(pbuf);
+	return (bytes);
+}
+
+int			ft_printf(const char *format, ...)
+{
+	char	buffer[PRINT_BUFF_SIZE];
+	t_p_buf *pbuf;
+	va_list	valist;
+	int		bytes;
+
+	ft_bzero(buffer, PRINT_BUFF_SIZE);
+	pbuf = (t_p_buf*)malloc(sizeof(t_p_buf));
+	pbuf->start = buffer;
+	pbuf->at = buffer;
+	pbuf->size = 0;
+	bytes = 0;
+	va_start(valist, format);
+	bytes = ft_vsprintf(pbuf, format, valist);
+	va_end(valist);
+	ft_putstr(buffer);
+	free(pbuf);
 	return (bytes);
 }
