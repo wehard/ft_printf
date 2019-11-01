@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/10/31 16:14:09 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/01 11:35:43 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,5 @@ int		ft_handle_p(va_list valist, t_flags *flags);
 int		ft_handle_x_low(va_list valist, t_flags *flags);
 int		ft_handle_x_up(va_list valist, t_flags *flags);
 
-/*
-** va_arg helpers
-*/
-
-int				ft_get_va_arg_int(va_list valist);
-unsigned int	ft_get_va_arg_uint(va_list valist);
-double			ft_get_va_arg_double(va_list valist);
-char			*ft_get_va_arg_cstr(va_list valist);
-uintmax_t		ft_get_va_arg_pointer(va_list valist);
 
 #endif

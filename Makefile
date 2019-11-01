@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/10/31 14:45:35 by wkorande         ###   ########.fr        #
+#    Updated: 2019/11/01 11:35:17 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,7 @@ SRC = 	ft_printf.c\
 		ft_itoa_base_uintmax_t.c\
 		ft_ndigits_base_uintmax_t.c\
 		ft_output.c\
-		ft_parse.c\
-		ft_va_arg_helper.c
+		ft_parse.c
 
 SRCDIR = src
 
@@ -55,7 +54,9 @@ test: re
 	@printf "\033[33m%s\n\033[34m" "Making test"
 	#@gcc -g -o test main.c $(SRCS) -I $(INCLDIR) -I $(LIBFTDIR)/includes  -L$(LIBFTDIR) -lft
 	@gcc -g -o test main.c $(SRCS) -I $(INCLDIR) -I $(LIBFTDIR)/includes  -L$(LIBFTDIR) -lft
+	@make clean
 	@printf "\033[33m%s\n\033[34m" "done"
+
 clean:
 	@printf "\033[1;30m"
 	make clean -C $(LIBFTDIR)
