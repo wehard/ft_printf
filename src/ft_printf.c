@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/02 16:58:23 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/02 17:01:52 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,16 @@ static void	ft_parse_spec_flags(char **fstr, t_flags *flags, va_list valist)
 	ft_parse_precision(fstr, flags, valist);
 }
 
-static int	ft_init_p_buff(t_p_buf *pbuf, char *dest)
+static t_p_buf	*ft_create_p_buf(char *dest)
 {
+	t_p_buf *pbuf;
+
 	if (!(pbuf = (t_p_buf*)malloc(sizeof(t_p_buf))))
-		return (-1);
+		return (NULL);
 	pbuf->start = dest;
 	pbuf->at = dest;
 	pbuf->size = 0;
-	return (1);
+	return (pbuf);
 }
 
 int			ft_vsprintf(char *dest, const char *format, va_list valist)
