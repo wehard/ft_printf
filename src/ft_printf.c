@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 14:55:00 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/02 16:58:23 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,28 @@ static void	ft_parse_spec_flags(char **fstr, t_flags *flags, va_list valist)
 	ft_parse_precision(fstr, flags, valist);
 }
 
-static int	ft_vsprintf(t_p_buf *dest, const char *format, va_list valist)
+static int	ft_init_p_buff(t_p_buf *pbuf, char *dest)
 {
+	if (!(pbuf = (t_p_buf*)malloc(sizeof(t_p_buf))))
+		return (-1);
+	pbuf->start = dest;
+	pbuf->at = dest;
+	pbuf->size = 0;
+	return (1);
+}
+
+int			ft_vsprintf(char *dest, const char *format, va_list valist)
+{
+	t_p_buf		*pbuf;
 	t_flags		*flags;
 	char		*fstr;
 	int			bytes;
 
+	if (!(pbuf = (t_p_buf*)malloc(sizeof(t_p_buf))))
+		return (-1);
+	pbuf->start = dest;
+	pbuf->at = dest;
+	pbuf->size = 0;
 	if (!(flags = ft_create_flags()))
 		return (-1);
 	fstr = (char*)format;
@@ -85,16 +101,18 @@ static int	ft_vsprintf(t_p_buf *dest, const char *format, va_list valist)
 			fstr++;
 			ft_parse_spec_flags(&fstr, flags, valist);
 			if (*fstr == '%')
-				ft_outchar_buf(dest, PERCENT, 1);
+				ft_outchar_buf(pbuf, PERCENT, 1);
 			else
-				bytes += ft_output_type(dest, valist, *fstr, flags);
+				bytes += ft_output_type(pbuf, valist, *fstr, flags);
 		}
 		else
-			ft_outchar_buf(dest, fstr, 1);
+			ft_outchar_buf(pbuf, fstr, 1);
 		fstr++;
 	}
+	bytes = pbuf->at - pbuf->start;
 	free(flags);
-	return (dest->at - dest->start);
+	free(pbuf);
+	return (bytes);
 }
 
 int			ft_sprintf(char *dest, const char *format, ...)
@@ -103,34 +121,23 @@ int			ft_sprintf(char *dest, const char *format, ...)
 	t_p_buf *pbuf;
 	int		bytes;
 
-	pbuf = (t_p_buf*)malloc(sizeof(t_p_buf));
-	pbuf->start = dest;
-	pbuf->at = dest;
-	pbuf->size = 0;
 	va_start(valist, format);
-	bytes = ft_vsprintf(pbuf, format, valist);
+	bytes = ft_vsprintf(dest, format, valist);
 	va_end(valist);
-	free(pbuf);
 	return (bytes);
 }
 
 int			ft_printf(const char *format, ...)
 {
 	char	buffer[PRINT_BUFF_SIZE];
-	t_p_buf *pbuf;
 	va_list	valist;
 	int		bytes;
 
 	ft_bzero(buffer, PRINT_BUFF_SIZE);
-	pbuf = (t_p_buf*)malloc(sizeof(t_p_buf));
-	pbuf->start = buffer;
-	pbuf->at = buffer;
-	pbuf->size = 0;
 	bytes = 0;
 	va_start(valist, format);
-	bytes = ft_vsprintf(pbuf, format, valist);
+	bytes = ft_vsprintf(buffer, format, valist);
 	va_end(valist);
 	ft_putstr(buffer);
-	free(pbuf);
 	return (bytes);
 }

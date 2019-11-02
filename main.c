@@ -6,12 +6,13 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 16:08:40 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/02 16:45:52 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include "ft_printf.h"
 #include "libft.h"
 
@@ -22,6 +23,33 @@
 #define NORMAL "\033[0;0m"
 
 int	ft_printf(const char *format, ...);
+int	ft_vsprintf(char *dest, const char *format, va_list valist);
+
+static int test_ft_printf(char *format, ...)
+{
+	char buf1[PRINT_BUFF_SIZE];
+	char buf2[PRINT_BUFF_SIZE];
+
+	va_list valist1;
+	va_list valist2;
+
+	ft_bzero(buf1, PRINT_BUFF_SIZE);
+	ft_bzero(buf2, PRINT_BUFF_SIZE);
+
+	va_start(valist1, format);
+	va_copy(valist2, valist1);
+	vsprintf(buf1, format, valist1);
+	ft_vsprintf(buf2, format, valist2);
+	va_end(valist1);
+	va_end(valist2);
+
+	ft_putstr(buf1);
+	ft_putstr(" vs ");
+	ft_putstr(buf2);
+	ft_putchar('\n');
+	return (1);
+}
+
 
 int	main(void)
 {
@@ -57,6 +85,8 @@ int	main(void)
 	ft_printf("\nflag test:\n");
 	ft_printf("%010i\n", 42);
 	ft_printf("%10s\n", "hello");
+
+	test_ft_printf("%s", "hello world");
 
 	//ft_printf("\033[22;34mHello, \033[22;33mworld!\033[0m\n");
 	//ft_printf("%10s %c\n", "char", 'x');
