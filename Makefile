@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/11/01 11:35:17 by wkorande         ###   ########.fr        #
+#    Updated: 2019/11/14 14:11:58 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,17 +50,18 @@ $(NAME):
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
-test: re
+test:
 	@printf "\033[33m%s\n\033[34m" "Making test"
 	#@gcc -g -o test main.c $(SRCS) -I $(INCLDIR) -I $(LIBFTDIR)/includes  -L$(LIBFTDIR) -lft
 	@gcc -g -o test main.c $(SRCS) -I $(INCLDIR) -I $(LIBFTDIR)/includes  -L$(LIBFTDIR) -lft
-	@make clean
+	#@make clean
 	@printf "\033[33m%s\n\033[34m" "done"
+	./test
 
 clean:
 	@printf "\033[1;30m"
-	make clean -C $(LIBFTDIR)
-	rm -f $(OBJS)
+	@make clean -C $(LIBFTDIR)
+	@rm -f $(OBJS)
 
 fclean: clean
 	make fclean -C $(LIBFTDIR)

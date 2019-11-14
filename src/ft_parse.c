@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 14:39:31 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/14 16:18:58 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ void	ft_init_flags(t_flags *flags)
 	flags->precision = 0;
 	flags->prefix = NULL;
 	flags->prefixlen = 0;
+	flags->length = LEN_NONE;
+}
+
+void	ft_set_prefix(t_flags *flags, char *prefix, int len)
+{
+	flags->prefix = prefix;
+	flags->prefixlen = len;
 }
 
 void	ft_parse_flags(char **fstr, t_flags *flags)
@@ -95,5 +102,36 @@ void	ft_parse_precision(char **fstr, t_flags *flags, va_list valist)
 			flags->precision = va_arg(valist, int);
 			(*fstr)++;
 		}
+	}
+}
+
+void	ft_parse_length(char **fstr, t_flags *flags)
+{
+	if (*(*fstr) == 'h')
+	{
+		if (*(*fstr + 1) == 'h')
+		{
+			flags->length = LEN_HH;
+			(*fstr)++;
+		}
+		else
+			flags->length = LEN_H;
+		(*fstr)++;
+	}
+	else if (*(*fstr) == 'l')
+	{
+		if (*(*fstr + 1) == 'l')
+		{
+			flags->length = LEN_LL;
+			(*fstr)++;
+		}
+		else
+			flags->length = LEN_L;
+		(*fstr)++;
+	}
+	else if (*(*fstr) == 'L')
+	{
+		flags->length = LEN_LD;
+		(*fstr)++;
 	}
 }

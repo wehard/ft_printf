@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/02 17:02:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/14 16:50:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static void	ft_parse_spec_flags(char **fstr, t_flags *flags, va_list valist)
 	ft_parse_flags(fstr, flags);
 	ft_parse_width(fstr, flags, valist);
 	ft_parse_precision(fstr, flags, valist);
+	ft_parse_length(fstr, flags);
 }
 
 static t_p_buf	*ft_create_p_buf(char *dest)
