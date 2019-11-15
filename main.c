@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/14 16:46:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/15 13:04:36 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,5 @@ int	main(void)
 
 	test_ft_printf("%.2s", "moi");
 
-	test_ft_printf("juu%.11.10 .3.14.20.5  gk");
 	return (0);
 }
