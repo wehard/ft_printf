@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/14 16:10:49 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/18 18:24:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int				ft_outchar_buf(t_p_buf *dest, const char *data,\
 								unsigned int len);
 int				ft_format_output(t_p_buf *dest, t_flags *flags,\
 								char *data, int len);
+void			ft_write(char *buf, size_t nbyte);
+
 
 /*
 ** Handle strings and chars

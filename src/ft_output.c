@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/01 14:07:24 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/18 18:23:37 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,9 @@ int		ft_outchar_buf(t_p_buf *dest, const char *data, unsigned int len)
 		len--;
 	}
 	return (len);
+}
+
+void	ft_write(char *buf, size_t nbyte)
+{
+	write(1, buf, nbyte);
 }

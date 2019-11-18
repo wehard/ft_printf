@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/14 16:50:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/18 18:24:37 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,6 @@ int			ft_printf(const char *format, ...)
 	va_start(valist, format);
 	bytes = ft_vsprintf(buffer, format, valist);
 	va_end(valist);
-	ft_putstr(buffer);
+	ft_write(buffer, bytes);
 	return (bytes);
 }
