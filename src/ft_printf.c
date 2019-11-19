@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/18 18:24:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/19 17:22:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,7 @@ static int	ft_output_type(t_p_buf *dst, va_list valist, char c, t_flags *flags)
 	return (bytes);
 }
 
-static void	ft_parse_spec_flags(char **fstr, t_flags *flags, va_list valist)
-{
-	ft_init_flags(flags);
-	ft_parse_flags(fstr, flags);
-	ft_parse_width(fstr, flags, valist);
-	ft_parse_precision(fstr, flags, valist);
-	ft_parse_length(fstr, flags);
-}
+
 
 static t_p_buf	*ft_create_p_buf(char *dest)
 {
@@ -82,12 +75,31 @@ static t_p_buf	*ft_create_p_buf(char *dest)
 	return (pbuf);
 }
 
+static int	ft_parse_formatting_and_output(t_p_buf *pbuf, char **fstr, t_flags *flags, va_list valist)
+{
+	int flags_done;
+	int bytes;
+
+	bytes = 0;
+	flags_done = 0;
+	ft_init_flags(flags);
+	while (ft_parse_flags(fstr, flags) ||
+					ft_parse_width(fstr, flags, valist) ||
+					ft_parse_precision(fstr, flags, valist) ||
+					ft_parse_length(fstr, flags))
+		flags_done = 1;
+	bytes += ft_output_type(pbuf, valist, *(*fstr), flags);
+	(*fstr)++;
+	return (bytes);
+}
+
 int			ft_vsprintf(char *dest, const char *format, va_list valist)
 {
 	t_p_buf		*pbuf;
 	t_flags		*flags;
 	char		*fstr;
 	int			bytes;
+	int			flags_done;
 
 	if (!(pbuf = (t_p_buf*)malloc(sizeof(t_p_buf))))
 		return (-1);
@@ -96,21 +108,18 @@ int			ft_vsprintf(char *dest, const char *format, va_list valist)
 	pbuf->size = 0;
 	if (!(flags = ft_create_flags()))
 		return (-1);
+	flags_done = 0;
 	fstr = (char*)format;
 	while (*fstr != '\0')
 	{
 		if (*fstr == '%')
 		{
 			fstr++;
-			ft_parse_spec_flags(&fstr, flags, valist);
-			if (*fstr == '%')
-				ft_outchar_buf(pbuf, PERCENT, 1);
-			else
-				bytes += ft_output_type(pbuf, valist, *fstr, flags);
+			ft_parse_formatting_and_output(pbuf, &fstr, flags, valist);
 		}
 		else
-			ft_outchar_buf(pbuf, fstr, 1);
-		fstr++;
+			while (*fstr && *fstr != '%')
+				ft_outchar_buf(pbuf, fstr++, 1);
 	}
 	bytes = pbuf->at - pbuf->start;
 	free(flags);

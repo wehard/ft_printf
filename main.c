@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/18 19:09:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/19 17:12:41 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-#define SET_COLOR(color) ft_printf(color)
+#define SET_COLOR(color) ft_putstr(color)
 #define WHITEBLACK "\033[107;30m"
 #define GRAYWHITE "\033[97;100m"
 #define BLUE "\033[22;34m"
@@ -47,10 +47,10 @@ static int test_ft_printf(char *info, char *format, ...)
 	va_end(valist1);
 	va_end(valist2);
 
-	ft_printf("%-10s\n", info);
+	ft_putendl(info);
 
 	SET_COLOR(BLUE);
-	ft_printf("%12s", "printf: ");
+	ft_putstr("printf:    ");
 
 	SET_COLOR(GRAYWHITE);
 	ft_putstr(buf1);
@@ -58,7 +58,7 @@ static int test_ft_printf(char *info, char *format, ...)
 	ft_putchar('\n');
 
 	SET_COLOR(WHITE);
-	ft_printf("%12s", "ft_printf: ");
+	ft_putstr("ft_printf: ");
 	SET_COLOR(WHITEBLACK);
 	ft_putstr(buf2);
 	SET_COLOR(NORMAL);
@@ -77,16 +77,19 @@ int	main(void)
 	//int c = 200;
 	//ft_printf("%d", 200);
 
-	test_ft_printf("Characters: ", "%c %c", 'a', 65);
-	test_ft_printf("Decimals: ", "%d %ld", 1977, 650000L);
-	test_ft_printf("Preceding with blanks: ", "%10d", 1977);
-	test_ft_printf("Preceding with zeros: ", "%010d", 1977);
-	test_ft_printf("Some different radices: ", "%d %x %o %#x %#o", 100, 100, 100, 100, 100);
-	test_ft_printf("floats: ", "%4.2f %.6f", 3.1416, 3.1416);
-	test_ft_printf("Width trick: ", "%*d", 5, 10);
-	test_ft_printf("", "%s", "A string");
-	test_ft_printf("", "%50p", ptr);
+	//test_ft_printf("", "%3c", 'c');
+	//test_ft_printf("Characters: ", "%c %c", 'a', 65);
+	//test_ft_printf("Decimals: ", "%d %ld", 1977, 650000L);
+	//test_ft_printf("Preceding with blanks: ", "%10d", 1977);
+	//test_ft_printf("Preceding with zeros: ", "%010d", 1977);
+	//test_ft_printf("Some different radices: ", "%d %x %o %#x %#o", 100, 100, 100, 100, 100);
+	//test_ft_printf("floats: ", "%4.2f %.6f", 3.1416, 3.1416);
+	//test_ft_printf("Width trick: ", "%*d", 5, 10);
+	//test_ft_printf("", "%s", "A string");
+	//test_ft_printf("", "%50p", ptr);
 
-	test_ft_printf("", "%-5c", 'c');
+	//test_ft_printf("", "%-5c", 'c');
+	test_ft_printf("test", "%s", "hello");
+	test_ft_printf("test", "hello, %s", "gavin");
 	return (0);
 }

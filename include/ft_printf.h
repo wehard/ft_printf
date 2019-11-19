@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/18 18:24:03 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/19 15:34:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,11 @@ int				ft_ndigits_base_uintmax_t(uintmax_t n, int base);
 t_flags			*ft_create_flags(void);
 void			ft_init_flags(t_flags *flags);
 void			ft_set_prefix(t_flags *flags, char *prefix, int len);
-void			ft_parse_flags(char **fstr, t_flags *flags);
-void			ft_parse_width(char **fstr, t_flags *flags, va_list valist);
-void			ft_parse_precision(char **fstr, t_flags *flags, va_list valist);
-void			ft_parse_length(char **fstr, t_flags *flags);
+
+int				ft_parse_flags(char **fstr, t_flags *flags);
+int				ft_parse_width(char **fstr, t_flags *flags, va_list valist);
+int				ft_parse_precision(char **fstr, t_flags *flags, va_list valist);
+int				ft_parse_length(char **fstr, t_flags *flags);
 
 int				ft_outchar_buf(t_p_buf *dest, const char *data,\
 								unsigned int len);

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/14 16:18:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/19 16:15:41 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,48 +46,49 @@ void	ft_set_prefix(t_flags *flags, char *prefix, int len)
 	flags->prefixlen = len;
 }
 
-void	ft_parse_flags(char **fstr, t_flags *flags)
+int	ft_parse_flags(char **fstr, t_flags *flags)
 {
-	int	is_parsing;
+	if (*(*fstr) == '#')
+		flags->hash = 1;
+	else if (*(*fstr) == '0')
+		flags->zero = 1;
+	else if (*(*fstr) == '-')
+		flags->minus = 1;
+	else if (*(*fstr) == '+')
+		flags->plus = 1;
+	else if (*(*fstr) == ' ')
+		flags->space = 1;
+	else
+		return (0);
+	(*fstr)++;
+	return (1);
+}
 
-	is_parsing = 1;
-	while (is_parsing)
+int	ft_parse_width(char **fstr, t_flags *flags, va_list valist)
+{
+	int w;
+
+	if ((w = ft_atoi(*fstr)) > 0 || *(*fstr) == '*')
 	{
-		if (*(*fstr) == '#')
-			flags->hash = 1;
-		else if (*(*fstr) == '0')
-			flags->zero = 1;
-		else if (*(*fstr) == '-')
-			flags->minus = 1;
-		else if (*(*fstr) == '+')
-			flags->plus = 1;
-		else if (*(*fstr) == ' ')
-			flags->space = 1;
+		if (*(*fstr) == '*')
+		{
+			w = va_arg(valist, int);
+			if (w < 0)
+				flags->minus = 1;
+			flags->width = (w < 0 ? w * -1 : w);
+			w = 1;
+		}
 		else
 		{
-			is_parsing = 0;
-			break ;
+			flags->width = w;
 		}
-		(*fstr)++;
+		(*fstr) += ft_ndigits(w);
+		return (1);
 	}
+	return (0);
 }
 
-void	ft_parse_width(char **fstr, t_flags *flags, va_list valist)
-{
-	if (*(*fstr) == '*')
-	{
-		flags->width = va_arg(valist, int);
-		(*fstr)++;
-		return ;
-	}
-	if (ft_isdigit(*(*fstr)))
-	{
-		flags->width = ft_atoi(*fstr);
-	}
-	(*fstr) += ft_ndigits(flags->width);
-}
-
-void	ft_parse_precision(char **fstr, t_flags *flags, va_list valist)
+int	ft_parse_precision(char **fstr, t_flags *flags, va_list valist)
 {
 	if (*(*fstr) == '.')
 	{
@@ -102,10 +103,12 @@ void	ft_parse_precision(char **fstr, t_flags *flags, va_list valist)
 			flags->precision = va_arg(valist, int);
 			(*fstr)++;
 		}
+		return (1);
 	}
+	return (0);
 }
 
-void	ft_parse_length(char **fstr, t_flags *flags)
+int	ft_parse_length(char **fstr, t_flags *flags)
 {
 	if (*(*fstr) == 'h')
 	{
@@ -117,6 +120,7 @@ void	ft_parse_length(char **fstr, t_flags *flags)
 		else
 			flags->length = LEN_H;
 		(*fstr)++;
+		return (1);
 	}
 	else if (*(*fstr) == 'l')
 	{
@@ -128,10 +132,13 @@ void	ft_parse_length(char **fstr, t_flags *flags)
 		else
 			flags->length = LEN_L;
 		(*fstr)++;
+		return (1);
 	}
 	else if (*(*fstr) == 'L')
 	{
 		flags->length = LEN_LD;
 		(*fstr)++;
+		return (1);
 	}
+	return (0);
 }
