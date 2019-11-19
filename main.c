@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/19 17:12:41 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/19 17:50:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ int	main(void)
 	//test_ft_printf("", "%-5c", 'c');
 	test_ft_printf("test", "%s", "hello");
 	test_ft_printf("test", "hello, %s", "gavin");
+	test_ft_printf("test", "%%");
 	return (0);
 }
