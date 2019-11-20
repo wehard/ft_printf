@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/20 10:51:13 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/20 18:24:12 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_flags
 	int			precision_specified;
 	int			precision;
 	int			length;
+	int			prefix_specified;
 	char		*prefix;
 	int			prefixlen;
 }				t_flags;
@@ -84,6 +85,7 @@ int				ft_outchar_buf(t_p_buf *dest, const char *data,\
 								unsigned int len);
 int				ft_format_output(t_p_buf *dest, t_flags *flags,\
 								char *data, int len);
+int				ft_format_output_w_zero_pad(t_p_buf *dest, t_flags *flags, char *data, int len);
 void			ft_write(char *buf, size_t nbyte);
 
 
@@ -104,11 +106,12 @@ int				ft_handle_u(t_p_buf *dest, va_list valist, t_flags *flags);
 int				ft_handle_f(t_p_buf *dest, va_list valist, t_flags *flags);
 
 /*
-** Handle others (pointer and hex conversion)
+** Handle others (pointer and hex conversion) + percent
 */
 
 int				ft_handle_p(t_p_buf *dest, va_list valist, t_flags *flags);
 int				ft_handle_x_low(t_p_buf *dest, va_list valist, t_flags *flags);
 int				ft_handle_x_up(t_p_buf *dest, va_list valist, t_flags *flags);
+int				ft_handle_percent(t_p_buf *dest, t_flags *flags);
 
 #endif

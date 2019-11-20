@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/20 13:16:39 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/20 17:13:21 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,19 @@ int	ft_handle_di(t_p_buf *dest, va_list valist, t_flags *flags)
 		n = (long long)va_arg(valist, int);
 	else
 		n = va_arg(valist, int);
-	if (flags->plus && n >= 0)
-		ft_set_prefix(flags, "+", 1);
-	else if (n > 0 && flags->space)
-		ft_set_prefix(flags, " ", 1);
-	else if (n < 0)
-	{
-		flags->plus = 1;
+
+	if (n < 0)
 		ft_set_prefix(flags, "-", 1);
-	}
-	if (flags->precision_specified)
+	else
 	{
-		if (ft_ndigits(n) < flags->precision)
-		{
-			flags->zero = 1;
-			flags->width = flags->precision + ft_ndigits(n);
-		}
+		if (flags->plus)
+			ft_set_prefix(flags, "+", 1);
+		if (flags->space)
+			ft_set_prefix(flags, " ", 1);
 	}
+
 	str = ft_itoa(n < 0 ? n * -1 : n);
-	bytes += ft_format_output(dest, flags, str, ft_strlen(str));
+	bytes += ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
 	free(str);
 	return (bytes);
 }

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/20 11:45:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/20 16:20:25 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_init_flags(t_flags *flags)
 	flags->width = 0;
 	flags->precision_specified = 0;
 	flags->precision = 0;
+	flags->prefix_specified = 0;
 	flags->prefix = NULL;
 	flags->prefixlen = 0;
 	flags->length = LEN_NONE;
@@ -45,6 +46,7 @@ void	ft_set_prefix(t_flags *flags, char *prefix, int len)
 {
 	flags->prefix = prefix;
 	flags->prefixlen = len;
+	flags->prefix_specified = 1;
 }
 
 int	ft_parse_flags(char **fstr, t_flags *flags)

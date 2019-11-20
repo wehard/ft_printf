@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/19 18:31:54 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/20 18:26:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static void	ft_output_format(t_p_buf *pbuf, char **fstr, t_flags *flags, va_list
 		flags_done = 1;
 	ft_output_type(pbuf, valist, *(*fstr), flags);
 	if (*(*fstr) == '%')
-		ft_outchar_buf(pbuf, PERCENT, 1);
+		ft_handle_percent(pbuf, flags);
 	(*fstr)++;
 }
 
