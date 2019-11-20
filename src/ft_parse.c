@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/19 16:15:41 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/20 11:45:51 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_init_flags(t_flags *flags)
 	flags->plus = 0;
 	flags->space = 0;
 	flags->width = 0;
+	flags->precision_specified = 0;
 	flags->precision = 0;
 	flags->prefix = NULL;
 	flags->prefixlen = 0;
@@ -92,11 +93,17 @@ int	ft_parse_precision(char **fstr, t_flags *flags, va_list valist)
 {
 	if (*(*fstr) == '.')
 	{
+		flags->precision_specified = 1;
+		flags->precision = 0;
 		(*fstr)++;
 		if (ft_isdigit(*(*fstr)))
 		{
-			flags->precision = ft_atoi(*fstr);
-			(*fstr) += ft_ndigits(flags->precision);
+			while (ft_isdigit(*(*fstr)))
+			{
+				flags->precision = flags->precision * 10 + (*(*fstr) - '0');
+				(*fstr)++;
+			}
+			//(*fstr) += ft_ndigits(flags->precision);
 		}
 		else if (*(*fstr) == '*')
 		{

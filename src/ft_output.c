@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/18 18:23:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/20 13:14:04 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,22 @@ int		ft_format_output(t_p_buf *dest, t_flags *flags, char *data, int len)
 			ft_outchar_buf(dest, flags->prefix, flags->prefixlen);
 		ft_outchar_buf(dest, data, len);
 		while (spaces-- > 0)
-			ft_outchar_buf(dest, " ", 1);
+			ft_outchar_buf(dest, SPACE, 1);
 	}
 	else
 	{
+		if (flags->zero)
+			ft_outchar_buf(dest, flags->prefix, flags->prefixlen);
 		while (spaces-- > 0)
-			flags->zero ?\
-				ft_outchar_buf(dest, ZERO, 1) : ft_outchar_buf(dest, SPACE, 1);
-		if (flags->hash || flags->plus)
+		{
+			if (flags->zero)
+			{
+				ft_outchar_buf(dest, ZERO, 1);
+			}
+			else
+				ft_outchar_buf(dest, SPACE, 1);
+		}
+		if ((flags->hash || flags->plus) && !flags->zero)
 			ft_outchar_buf(dest, flags->prefix, flags->prefixlen);
 		ft_outchar_buf(dest, data, len);
 	}

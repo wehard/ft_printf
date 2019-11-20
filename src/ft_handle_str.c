@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:25:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/19 17:18:49 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/20 11:48:35 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ int	ft_handle_s(t_p_buf *dest, va_list valist, t_flags *flags)
 	int		len;
 
 	s = va_arg(valist, char *);
-	len = flags->precision > 0 ? flags->precision : ft_strlen(s);
+	if (!s)
+		s = NULL_STRING;
+	if (flags->precision_specified)
+		len = ft_min(ft_strlen(s), flags->precision);
+	else
+		len = ft_strlen(s);
 	return (ft_format_output(dest, flags, s, len));
 }

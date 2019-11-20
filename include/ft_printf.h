@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/19 18:09:14 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/20 10:51:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "stdint.h"
 
 # define PRINT_BUFF_SIZE 1024
+# define NULL_STRING "(null)"
 # define BASE16LOW "0123456789abcdef"
 # define BASE16UP "0123456789ABCDEF"
 # define BASE8 "01234567"
@@ -48,6 +49,7 @@ typedef struct	s_flags
 	int			minus;
 	int			space;
 	int			width;
+	int			precision_specified;
 	int			precision;
 	int			length;
 	char		*prefix;
