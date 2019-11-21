@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/21 21:45:42 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/21 21:56:39 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ int	main(void)
 	//test_ft_printf("%8.5d, 34", "%8.5d", 34);
 	SET_COLOR(NORMAL);
 	test_ft_printf("", "%+10.3d", 1234);
+	test_ft_printf("", "%07d", -54);
 	return (0);
 }
