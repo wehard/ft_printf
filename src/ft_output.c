@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/21 21:57:46 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/21 22:08:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,11 @@ int		ft_format_output_w_zero_pad(t_p_buf *dest, t_flags *flags, char *data, int 
 		if (flags->precision > len)
 			precision_left = flags->precision - len;
 	}
-
 	if (flags->width_specified)
 	{
 		if (flags->width > len + precision_left + flags->prefixlen)
 			width_left = flags->width - len - flags->prefixlen - precision_left;
 	}
-
 	if (flags->minus)
 	{
 		if (flags->prefix_specified)
@@ -67,16 +65,16 @@ int		ft_format_output_w_zero_pad(t_p_buf *dest, t_flags *flags, char *data, int 
 	}
 	else
 	{
+		if (flags->zero_specified && flags->prefix_specified)
+			ft_outchar_buf(dest, flags->prefix, flags->prefixlen);
 		while (width_left-- > 0)
 			ft_outchar_buf(dest, flags->zero_specified ? ZERO : SPACE, 1);
-		if (flags->prefix_specified)
+		if (!flags->zero_specified && flags->prefix_specified)
 			ft_outchar_buf(dest, flags->prefix, flags->prefixlen);
 		while (precision_left-- > 0)
 			ft_outchar_buf(dest, ZERO, 1);
 		ft_outchar_buf(dest, data, len);
 	}
-
-
 	return (dest->start - dest->at);
 }
 
