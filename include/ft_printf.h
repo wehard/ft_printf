@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/20 18:24:12 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/21 14:26:07 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ typedef struct	s_p_buff
 typedef struct	s_flags
 {
 	int			hash;
+	int			zero_specified;
 	int			zero;
 	int			plus;
 	int			minus;
 	int			space;
+	int			width_specified;
 	int			width;
 	int			precision_specified;
 	int			precision;

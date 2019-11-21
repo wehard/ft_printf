@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/20 18:17:24 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/21 17:16:18 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ static int test_ft_printf(char *info, char *format, ...)
 
 int	main(void)
 {
-	int a;
-	int *ptr;
+	//int a;
+	//int *ptr;
 
-	a = 10;
-	ptr = &a;
+	//a = 10;
+	//ptr = &a;
 	//int c = 200;
 	//ft_printf("%d", 200);
 
@@ -86,7 +86,7 @@ int	main(void)
 	//test_ft_printf("floats: ", "%4.2f %.6f", 3.1416, 3.1416);
 	//test_ft_printf("Width trick: ", "%*d", 5, 10);
 	//test_ft_printf("", "%s", "A string");
-	test_ft_printf("", "%50p", NULL);
+	//test_ft_printf("", "%50p", NULL);
 
 	//test_ft_printf("", "%-5c", 'c');
 	//test_ft_printf("test", "%s", "hello");
@@ -99,11 +99,12 @@ int	main(void)
 	//test_ft_printf("", "this %d number", -267);
 	//test_ft_printf("%.6d, -3", "%.6d", -3);
 	//test_ft_printf("%-7d -14", "%-7d", -14);
-	test_ft_printf("%.5d 2", "%.5d", 2);
-	test_ft_printf("%+.7d 234", "%+.7d", 234);
-	test_ft_printf("%7d, -14", "%7d", -14);
-	test_ft_printf("%18.0d 34", "%18.0d", 34);
-	test_ft_printf("%8.5d, 34", "%8.5d", 34);
-	test_ft_printf("", "%5%");
+	//test_ft_printf("%.5d 2", "%.5d", 2);
+	//test_ft_printf("%+.7d 234", "%+.7d", 234);
+	//test_ft_printf("%7d, -14", "%7d", -14);
+	//test_ft_printf("%+18.5d 34", "%+18.5d", 34);
+	//test_ft_printf("%8.5d, 34", "%8.5d", 34);
+	SET_COLOR(NORMAL);
+	test_ft_printf("", "%+10.5d", 123);
 	return (0);
 }

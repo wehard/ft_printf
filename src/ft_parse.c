@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/20 16:20:25 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/21 16:21:37 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ void	ft_init_flags(t_flags *flags)
 	if (!flags)
 		return ;
 	flags->hash = 0;
+	flags->zero_specified = 0;
 	flags->zero = 0;
 	flags->minus = 0;
 	flags->plus = 0;
 	flags->space = 0;
+	flags->width_specified = 0;
 	flags->width = 0;
 	flags->precision_specified = 0;
 	flags->precision = 0;
@@ -54,7 +56,10 @@ int	ft_parse_flags(char **fstr, t_flags *flags)
 	if (*(*fstr) == '#')
 		flags->hash = 1;
 	else if (*(*fstr) == '0')
+	{
 		flags->zero = 1;
+		flags->zero_specified = 1;
+	}
 	else if (*(*fstr) == '-')
 		flags->minus = 1;
 	else if (*(*fstr) == '+')
@@ -79,11 +84,13 @@ int	ft_parse_width(char **fstr, t_flags *flags, va_list valist)
 			if (w < 0)
 				flags->minus = 1;
 			flags->width = (w < 0 ? w * -1 : w);
+			flags->width_specified = 1;
 			w = 1;
 		}
 		else
 		{
 			flags->width = w;
+			flags->width_specified = 1;
 		}
 		(*fstr) += ft_ndigits(w);
 		return (1);
