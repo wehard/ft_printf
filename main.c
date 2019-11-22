@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/21 22:18:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/22 15:10:45 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,10 @@ int	main(void)
 	test_ft_printf("", "%+10.3d", 1234);
 	test_ft_printf("", "%07d", -54);
 	test_ft_printf("", "%08.5d", 34);
-	test_ft_printf("long", "%ld", __LONG_MAX__);
 	test_ft_printf("", "% 0+-3.3d", 6983);
 	test_ft_printf("", "%5.0d", 0);
+	test_ft_printf("long_max", "%ld", __INT64_MAX__);
+	test_ft_printf("long_min", "%ld", INT64_MIN);
+	test_ft_printf("", "this %o number", 17);
 	return (0);
 }

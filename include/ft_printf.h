@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/21 14:26:07 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/22 14:54:10 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define NULL_STRING "(null)"
 # define BASE16LOW "0123456789abcdef"
 # define BASE16UP "0123456789ABCDEF"
+# define BASE10 "0123456789"
 # define BASE8 "01234567"
 # define BASE2 "01"
 # define PERCENT "%"
@@ -68,11 +69,6 @@ typedef struct	s_sp_type
 }				t_sp_type;
 
 int				ft_printf(const char *restrict format, ...); //__attribute__ ((format(printf, 1, 2)));
-
-void			ft_putnbr_uintmax_t(uintmax_t n);
-void			ft_putnbr_base_uintmax_t(uintmax_t n, int base, char *digits);
-char			*ft_itoa_base_uintmax_t(uintmax_t n, char *digits);
-int				ft_ndigits_base_uintmax_t(uintmax_t n, int base);
 
 t_flags			*ft_create_flags(void);
 void			ft_init_flags(t_flags *flags);

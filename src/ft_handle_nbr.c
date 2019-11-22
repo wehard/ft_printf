@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/21 22:25:31 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/22 15:06:53 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	ft_handle_di(t_p_buf *dest, va_list valist, t_flags *flags)
 	else if (flags->length == LEN_H)
 		n = (short)va_arg(valist, int);
 	else if (flags->length == LEN_L)
-		n = (long)va_arg(valist, int);
+		n = (long)va_arg(valist, long);
 	else if (flags->length == LEN_LL)
-		n = (long long)va_arg(valist, int);
+		n = (long long)va_arg(valist, long long);
 	else
 		n = va_arg(valist, int);
 	if (n < 0)
@@ -45,7 +45,7 @@ int	ft_handle_di(t_p_buf *dest, va_list valist, t_flags *flags)
 	if (flags->precision_specified && flags->precision == 0)
 		str = ft_strdup("");
 	else
-		str = ft_itoa(n < 0 ? n * -1 : n);
+		str = ft_itoa_uint64(n < 0 ? (uint64_t)(n * -1) : (uint64_t)n);
 	bytes = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
 	free(str);
 	return (bytes);

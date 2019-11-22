@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:42:28 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/20 18:27:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/22 13:55:33 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int	ft_handle_p(t_p_buf *dest, va_list valist, t_flags *flags)
 {
-	char			*str;
-	char			*tmp;
-	unsigned long	p;
-	int				bytes;
+	char		*str;
+	char		*tmp;
+	uint64_t	p;
+	int			bytes;
 
 	flags->hash = 1;
 	ft_set_prefix(flags, "0x", 2);
@@ -26,7 +26,7 @@ int	ft_handle_p(t_p_buf *dest, va_list valist, t_flags *flags)
 	if (!p)
 		str = "0";
 	else
-		str = ft_itoa_base_uintmax_t(p, BASE16LOW);
+		str = ft_itoa_base_uint64(p, BASE16LOW);
 	bytes = ft_format_output(dest, flags, str, ft_strlen(str));
 	if (p)
 		free(str);
