@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/22 14:54:10 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/22 19:19:39 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdarg.h>
 # include "stdint.h"
 
-# define PRINT_BUFF_SIZE 1024
+# define PRINT_BUFF_SIZE 9000
 # define NULL_STRING "(null)"
 # define BASE16LOW "0123456789abcdef"
 # define BASE16UP "0123456789ABCDEF"
