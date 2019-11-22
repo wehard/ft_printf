@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/22 15:06:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/22 16:53:25 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_handle_di(t_p_buf *dest, va_list valist, t_flags *flags)
 		if (!flags->plus && flags->space)
 			ft_set_prefix(flags, " ", 1);
 	}
-	if (flags->precision_specified) // ??? Check this
+	if (flags->precision_specified)
 		flags->zero_specified = 0;
 	if (flags->precision_specified && flags->precision == 0)
 		str = ft_strdup("");
@@ -53,51 +53,61 @@ int	ft_handle_di(t_p_buf *dest, va_list valist, t_flags *flags)
 
 int	ft_handle_o(t_p_buf *dest, va_list valist, t_flags *flags)
 {
-	char			*str;
-	unsigned int	n;
-	int				i;
-	unsigned int	uintarg;
+	char		*str;
+	uint64_t	n;
+	int			bytes;
 
-	uintarg = va_arg(valist, unsigned int);
 	if (flags->length == LEN_HH)
-		n = (unsigned char)uintarg;
+		n = (unsigned char)va_arg(valist, unsigned int);
 	else if (flags->length == LEN_H)
-		n = (unsigned short)uintarg;
+		n = (unsigned short)va_arg(valist, unsigned int);
 	else if (flags->length == LEN_L)
-		n = (unsigned long)uintarg;
+		n = (unsigned long)va_arg(valist, unsigned long);
 	else if (flags->length == LEN_LL)
-		n = (unsigned long long)uintarg;
+		n = (unsigned long long)va_arg(valist, unsigned long long);
 	else
-		n = uintarg;
-	ft_set_prefix(flags, "0", 1);
-	str = ft_itoa_base(n, BASE8);
-	i = ft_format_output(dest, flags, str, ft_strlen(str));
+		n = va_arg(valist, unsigned int);
+	if (flags->precision_specified)
+	{
+		flags->zero_specified = 0;
+		flags->precision -= (n != 0) ? flags->hash : 0;
+	}
+	if (flags->hash && n != 0)
+		ft_set_prefix(flags, ZERO, 1);
+	if (flags->precision_specified && flags->precision == 0 && !flags->hash)
+		str = ft_strdup("");
+	else
+		str = ft_itoa_base_uint64(n, BASE8);
+	bytes = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
 	free(str);
-	return (i);
+	return (bytes);
 }
 
 int	ft_handle_u(t_p_buf *dest, va_list valist, t_flags *flags)
 {
-	char			*str;
-	unsigned int	n;
-	int				i;
-	unsigned int	uintarg;
+	char		*str;
+	uint64_t	n;
+	int			bytes;
 
-	uintarg = va_arg(valist, unsigned int);
 	if (flags->length == LEN_HH)
-		n = (unsigned char)uintarg;
+		n = (unsigned char)va_arg(valist, unsigned int);
 	else if (flags->length == LEN_H)
-		n = (unsigned short)uintarg;
+		n = (unsigned short)va_arg(valist, unsigned int);
 	else if (flags->length == LEN_L)
-		n = (unsigned long)uintarg;
+		n = (unsigned long)va_arg(valist, unsigned long);
 	else if (flags->length == LEN_LL)
-		n = (unsigned long long)uintarg;
+		n = (unsigned long long)va_arg(valist, unsigned long long);
 	else
-		n = uintarg;
-	str = ft_itoa(n);
-	i = ft_format_output(dest, flags, str, ft_strlen(str));
+		n = va_arg(valist, unsigned int);
+	if (flags->precision_specified)
+		flags->zero_specified = 0;
+	if (flags->precision_specified && flags->precision == 0)
+		str = ft_strdup("");
+	else
+		str = ft_itoa_uint64(n);
+	bytes = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
 	free(str);
-	return (i);
+	return (bytes);
 }
 
 int	ft_handle_f(t_p_buf *dest, va_list valist, t_flags *flags)
@@ -112,7 +122,7 @@ int	ft_handle_f(t_p_buf *dest, va_list valist, t_flags *flags)
 	if (d < 0)
 		ft_set_prefix(flags, "-", 1);
 	str = ft_dtoa((d < 0 ? -d : d), flags->precision);
-	i = ft_format_output(dest, flags, str, ft_strlen(str));
+	i = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
 	free(str);
 	return (i);
 }
