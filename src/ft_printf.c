@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/22 19:01:36 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/25 13:48:14 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,6 @@
 #include <stdarg.h>
 #include "libft.h"
 #include "ft_printf.h"
-
-/*
-** You have to manage the following conversions: csp
-** You have to manage the following conversions:
-**						diouxX with the following flags: hh, h, l and ll.
-** You have to manage the following conversion:
-**						f with the following flags: l and L.
-** You must manage %%
-** You must manage the flags #0-+ and space
-** You must manage the minimum field-width
-** You must manage the precision
-**
-** %[flags][width][.precision][length]specifier
-*/
-
-#define N_HANDLERS 10
 
 t_sp_type g_output_types[N_HANDLERS] =
 {
@@ -45,7 +29,7 @@ t_sp_type g_output_types[N_HANDLERS] =
 	{'f', ft_handle_f}
 };
 
-static int	ft_output_type(t_p_buf *dst, va_list valist, char c, t_flags *flags)
+int		ft_output_type(t_p_buf *dst, va_list valist, char c, t_flags *flags)
 {
 	int i;
 	int bytes;
@@ -59,40 +43,6 @@ static int	ft_output_type(t_p_buf *dst, va_list valist, char c, t_flags *flags)
 		i++;
 	}
 	return (bytes);
-}
-
-static t_p_buf	*ft_create_p_buf(char *dest)
-{
-	t_p_buf *pbuf;
-
-	if (!(pbuf = (t_p_buf*)malloc(sizeof(t_p_buf))))
-		return (NULL);
-	pbuf->start = dest;
-	pbuf->at = dest;
-	pbuf->size = 0;
-	return (pbuf);
-}
-
-/*
-**	Doubles size of print buffer
-*/
-
-static int	ft_resize_p_buf(t_p_buf *pbuf)
-{
-	int		oldsize;
-	int		size;
-	char	*tmp;
-
-	oldsize = pbuf->size;
-	size = pbuf->size * 2;
-	if (!(tmp = (char*)malloc(sizeof(char) * size)))
-		return (0);
-	tmp = ft_memcpy(tmp, pbuf->start, pbuf->size);
-	free(pbuf->start);
-	pbuf->start = tmp;
-	pbuf->at = tmp + oldsize;
-	pbuf->size = size;
-	return (1);
 }
 
 static void	ft_output_format(t_p_buf *pbuf, char **fstr, t_flags *flags, va_list valist)

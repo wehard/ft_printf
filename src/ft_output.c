@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/21 22:08:31 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/25 13:50:15 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int		ft_format_output(t_p_buf *dest, t_flags *flags, char *data, int len)
 
 int		ft_format_output_w_zero_pad(t_p_buf *dest, t_flags *flags, char *data, int len)
 {
-	int precision_left = 0;
-	int width_left = 0;
+	int precision_left;
+	int width_left;
 
+	precision_left = 0;
+	width_left = 0;
 	if (flags->precision_specified)
 	{
 		if (flags->precision > len)

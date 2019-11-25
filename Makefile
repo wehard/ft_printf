@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/11/22 13:53:44 by wkorande         ###   ########.fr        #
+#    Updated: 2019/11/25 13:40:41 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC = 	ft_printf.c\
 		ft_handle_nbr.c\
 		ft_handle_other.c\
 		ft_output.c\
-		ft_parse.c
+		ft_parse.c\
+		ft_buffer.c
 
 SRCDIR = src
 

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/21 16:21:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/25 13:45:57 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ int	ft_parse_precision(char **fstr, t_flags *flags, va_list valist)
 				flags->precision = flags->precision * 10 + (*(*fstr) - '0');
 				(*fstr)++;
 			}
-			//(*fstr) += ft_ndigits(flags->precision);
 		}
 		else if (*(*fstr) == '*')
 		{

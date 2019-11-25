@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/22 19:19:39 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/25 13:47:46 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdarg.h>
 # include "stdint.h"
 
+# define N_HANDLERS 10
 # define PRINT_BUFF_SIZE 9000
 # define NULL_STRING "(null)"
 # define BASE16LOW "0123456789abcdef"
@@ -34,6 +35,8 @@
 # define LEN_L 3
 # define LEN_LL 4
 # define LEN_LD 5
+
+
 
 typedef struct	s_p_buff
 {
@@ -68,6 +71,7 @@ typedef struct	s_sp_type
 	t_s_func	output_func;
 }				t_sp_type;
 
+
 int				ft_printf(const char *restrict format, ...); //__attribute__ ((format(printf, 1, 2)));
 
 t_flags			*ft_create_flags(void);
@@ -86,6 +90,8 @@ int				ft_format_output(t_p_buf *dest, t_flags *flags,\
 int				ft_format_output_w_zero_pad(t_p_buf *dest, t_flags *flags, char *data, int len);
 void			ft_write(char *buf, size_t nbyte);
 
+t_p_buf			*ft_create_p_buf(char *dest);
+int				ft_resize_p_buf(t_p_buf *pbuf);
 
 /*
 ** Handle strings and chars
