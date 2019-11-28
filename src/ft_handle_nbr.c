@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/25 13:28:29 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/28 18:42:33 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,10 @@ int	ft_handle_f(t_p_buf *dest, va_list valist, t_flags *flags)
 
 	if (!flags->precision_specified)
 		flags->precision = 6;
-	d = va_arg(valist, double);
+	if (flags->length == LEN_LD)
+		d = va_arg(valist, long double);
+	else
+		d = va_arg(valist, double);
 	if (d < 0)
 		ft_set_prefix(flags, "-", 1);
 	else
@@ -128,6 +131,8 @@ int	ft_handle_f(t_p_buf *dest, va_list valist, t_flags *flags)
 		if (!flags->plus && flags->space)
 			ft_set_prefix(flags, " ", 1);
 	}
+	if (flags->minus)
+		flags->zero_specified = 0;
 	str = ft_dtoa((d < 0 ? -d : d), flags->precision);
 	i = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
 	free(str);
