@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 18:17:10 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:03:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ typedef struct	s_flags
 	int			space;
 	int			width_specified;
 	int			width;
+	int			width_left;
 	int			precision_specified;
 	int			precision;
+	int			precision_left;
 	int			length;
 	int			prefix_specified;
 	char		*prefix;
@@ -103,5 +105,13 @@ int				ft_handle_p(va_list valist, t_flags *flags);
 int				ft_handle_x_low(va_list valist, t_flags *flags);
 int				ft_handle_x_up(va_list valist, t_flags *flags);
 int				ft_handle_percent(t_flags *flags);
+
+/*
+**	Help for casting types based on length
+*/
+
+int64_t			ft_cast_signed(int length, va_list valist);
+uint64_t		ft_cast_unsigned(int length, va_list valist);
+long double		ft_cast_double(int length, va_list valist);
 
 #endif

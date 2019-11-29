@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 18:16:36 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:36:19 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-t_sp_type g_output_types[N_HANDLERS] =
+t_sp_type	g_output_types[N_HANDLERS] =
 {
 	{'c', ft_handle_c},
 	{'s', ft_handle_s},
@@ -29,7 +29,7 @@ t_sp_type g_output_types[N_HANDLERS] =
 	{'f', ft_handle_f}
 };
 
-int		ft_output_type(va_list valist, char c, t_flags *flags)
+int			ft_output_type(va_list valist, char c, t_flags *flags)
 {
 	int i;
 	int bytes;

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 18:00:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:02:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,7 @@ int	ft_handle_di(va_list valist, t_flags *flags)
 	int		bytes;
 	size_t	len;
 
-	if (flags->length == LEN_HH)
-		n = (char)va_arg(valist, int);
-	else if (flags->length == LEN_H)
-		n = (short)va_arg(valist, int);
-	else if (flags->length == LEN_L)
-		n = (long)va_arg(valist, long);
-	else if (flags->length == LEN_LL)
-		n = (long long)va_arg(valist, long long);
-	else
-		n = va_arg(valist, int);
+	n = ft_cast_signed(flags->length, valist);
 	if (n < 0)
 		ft_set_prefix(flags, "-", 1);
 	else
@@ -57,16 +48,7 @@ int	ft_handle_o(va_list valist, t_flags *flags)
 	uint64_t	n;
 	int			bytes;
 
-	if (flags->length == LEN_HH)
-		n = (unsigned char)va_arg(valist, unsigned int);
-	else if (flags->length == LEN_H)
-		n = (unsigned short)va_arg(valist, unsigned int);
-	else if (flags->length == LEN_L)
-		n = (unsigned long)va_arg(valist, unsigned long);
-	else if (flags->length == LEN_LL)
-		n = (unsigned long long)va_arg(valist, unsigned long long);
-	else
-		n = va_arg(valist, unsigned int);
+	n = ft_cast_unsigned(flags->length, valist);
 	if (flags->precision_specified)
 	{
 		flags->zero_specified = 0;
@@ -89,16 +71,7 @@ int	ft_handle_u(va_list valist, t_flags *flags)
 	uint64_t	n;
 	int			bytes;
 
-	if (flags->length == LEN_HH)
-		n = (unsigned char)va_arg(valist, unsigned int);
-	else if (flags->length == LEN_H)
-		n = (unsigned short)va_arg(valist, unsigned int);
-	else if (flags->length == LEN_L)
-		n = (unsigned long)va_arg(valist, unsigned long);
-	else if (flags->length == LEN_LL)
-		n = (unsigned long long)va_arg(valist, unsigned long long);
-	else
-		n = va_arg(valist, unsigned int);
+	n = ft_cast_unsigned(flags->length, valist);
 	if (flags->precision_specified)
 		flags->zero_specified = 0;
 	if (flags->precision_specified && flags->precision == 0)
@@ -118,10 +91,7 @@ int	ft_handle_f(va_list valist, t_flags *flags)
 
 	if (!flags->precision_specified)
 		flags->precision = 6;
-	if (flags->length == LEN_LD)
-		d = va_arg(valist, long double);
-	else
-		d = va_arg(valist, double);
+	d = ft_cast_double(flags->length, valist);
 	if (d < 0)
 		ft_set_prefix(flags, "-", 1);
 	else

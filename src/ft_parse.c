@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 18:01:48 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:27:11 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void	ft_init_flags(t_flags *flags)
 	flags->space = 0;
 	flags->width_specified = 0;
 	flags->width = 0;
+	flags->width_left = 0;
 	flags->precision_specified = 0;
 	flags->precision = 0;
+	flags->precision_left = 0;
 	flags->prefix_specified = 0;
 	flags->prefix = NULL;
 	flags->prefixlen = 0;
