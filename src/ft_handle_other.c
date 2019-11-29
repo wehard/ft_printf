@@ -6,14 +6,14 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:42:28 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 19:05:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:39:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-int	ft_handle_p(va_list valist, t_flags *flags)
+int	ft_handle_p(t_flags *flags, va_list valist)
 {
 	char		*str;
 	char		*tmp;
@@ -33,7 +33,7 @@ int	ft_handle_p(va_list valist, t_flags *flags)
 	return (bytes);
 }
 
-int	ft_handle_x_low(va_list valist, t_flags *flags)
+int	ft_handle_x_low(t_flags *flags, va_list valist)
 {
 	char			*str;
 	uint64_t		n;
@@ -53,7 +53,7 @@ int	ft_handle_x_low(va_list valist, t_flags *flags)
 	return (bytes);
 }
 
-int	ft_handle_x_up(va_list valist, t_flags *flags)
+int	ft_handle_x_up(t_flags *flags, va_list valist)
 {
 	char			*str;
 	uint64_t		n;

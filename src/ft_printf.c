@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 18:36:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:37:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			ft_output_type(va_list valist, char c, t_flags *flags)
 	while (i < N_HANDLERS)
 	{
 		if (g_output_types[i].c == c)
-			bytes = g_output_types[i].output_func(valist, flags);
+			bytes = g_output_types[i].output_func(flags, valist);
 		i++;
 	}
 	return (bytes);

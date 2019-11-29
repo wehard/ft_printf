@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 18:27:11 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:16:21 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,7 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-t_flags	*ft_create_flags(void)
-{
-	t_flags *flags;
-
-	if (!(flags = (t_flags*)malloc(sizeof(t_flags))))
-		return (NULL);
-	ft_init_flags(flags);
-	return (flags);
-}
-
-void	ft_init_flags(t_flags *flags)
-{
-	if (!flags)
-		return ;
-	flags->hash = 0;
-	flags->zero_specified = 0;
-	flags->zero = 0;
-	flags->minus = 0;
-	flags->plus = 0;
-	flags->space = 0;
-	flags->width_specified = 0;
-	flags->width = 0;
-	flags->width_left = 0;
-	flags->precision_specified = 0;
-	flags->precision = 0;
-	flags->precision_left = 0;
-	flags->prefix_specified = 0;
-	flags->prefix = NULL;
-	flags->prefixlen = 0;
-	flags->length = LEN_NONE;
-}
-
-void	ft_set_prefix(t_flags *flags, char *prefix, int len)
-{
-	flags->prefix = prefix;
-	flags->prefixlen = len;
-	flags->prefix_specified = 1;
-}
-
-int	ft_parse_flags(char **fstr, t_flags *flags)
+int		ft_parse_flags(char **fstr, t_flags *flags)
 {
 	if (*(*fstr) == '#')
 		flags->hash = 1;
@@ -74,7 +35,7 @@ int	ft_parse_flags(char **fstr, t_flags *flags)
 	return (1);
 }
 
-int	ft_parse_width(char **fstr, t_flags *flags, va_list valist)
+int		ft_parse_width(char **fstr, t_flags *flags, va_list valist)
 {
 	int w;
 
@@ -100,7 +61,7 @@ int	ft_parse_width(char **fstr, t_flags *flags, va_list valist)
 	return (0);
 }
 
-int	ft_parse_precision(char **fstr, t_flags *flags, va_list valist)
+int		ft_parse_precision(char **fstr, t_flags *flags, va_list valist)
 {
 	if (*(*fstr) == '.')
 	{
@@ -125,15 +86,12 @@ int	ft_parse_precision(char **fstr, t_flags *flags, va_list valist)
 	return (0);
 }
 
-int	ft_parse_length(char **fstr, t_flags *flags)
+int		ft_parse_length(char **fstr, t_flags *flags)
 {
 	if (*(*fstr) == 'h')
 	{
-		if (*(*fstr + 1) == 'h')
-		{
+		if (*(*fstr + 1) == 'h' && (*fstr)++)
 			flags->length = LEN_HH;
-			(*fstr)++;
-		}
 		else
 			flags->length = LEN_H;
 		(*fstr)++;
@@ -141,11 +99,8 @@ int	ft_parse_length(char **fstr, t_flags *flags)
 	}
 	else if (*(*fstr) == 'l')
 	{
-		if (*(*fstr + 1) == 'l')
-		{
+		if (*(*fstr + 1) == 'l' && (*fstr)++)
 			flags->length = LEN_LL;
-			(*fstr)++;
-		}
 		else
 			flags->length = LEN_L;
 		(*fstr)++;

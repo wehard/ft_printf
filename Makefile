@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/11/29 19:04:13 by wkorande         ###   ########.fr        #
+#    Updated: 2019/11/29 19:42:33 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = 	ft_printf.c\
 		ft_handle_other.c\
 		ft_output.c\
 		ft_parse.c\
-		ft_cast_helper.c
+		ft_cast_helper.c\
+		ft_flags.c
 
 SRCDIR = src
 
@@ -46,14 +47,6 @@ $(NAME):
 	@printf "\033[31m%s\n\033[34m" "Creating final $(NAME)"
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-
-test:
-	@printf "\033[33m%s\n\033[34m" "Making test"
-	#@gcc -g -o test main.c $(SRCS) -I $(INCLDIR) -I $(LIBFTDIR)/includes  -L$(LIBFTDIR) -lft
-	@gcc -g -o test main.c $(SRCS) -I $(INCLDIR) -I $(LIBFTDIR)/includes  -L$(LIBFTDIR) -lft
-	#@make clean
-	@printf "\033[33m%s\n\033[34m" "done"
-	./test
 
 clean:
 	@printf "\033[1;30m"

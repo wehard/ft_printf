@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:25:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 18:12:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:40:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** int	ft_handle_c(int c, t_flags *flags)
 */
 
-int	ft_handle_c(va_list valist, t_flags *flags)
+int	ft_handle_c(t_flags *flags, va_list valist)
 {
 	char c;
 
@@ -25,7 +25,7 @@ int	ft_handle_c(va_list valist, t_flags *flags)
 	return (ft_format(flags, &c, 1));
 }
 
-int	ft_handle_s(va_list valist, t_flags *flags)
+int	ft_handle_s(t_flags *flags, va_list valist)
 {
 	char	*s;
 	int		len;
