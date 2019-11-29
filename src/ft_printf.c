@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 19:37:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 20:22:32 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	ft_output_format(char **fstr, t_flags *flags, va_list valist)
 	int bytes;
 	int flags_done;
 
+	if (*(*fstr) == '\0')
+		return (-1);
 	bytes = 0;
 	flags_done = 0;
 	ft_init_flags(flags);
@@ -58,6 +60,8 @@ static int	ft_output_format(char **fstr, t_flags *flags, va_list valist)
 					ft_parse_precision(fstr, flags, valist) ||
 					ft_parse_length(fstr, flags))
 		flags_done = 1;
+	if (*(*fstr) == '\0')
+		return (-1);
 	bytes += ft_output_type(valist, *(*fstr), flags);
 	if (*(*fstr) == '%')
 		bytes += ft_handle_percent(flags);
@@ -85,6 +89,10 @@ int			ft_printf(const char *format, ...)
 	size_t		bytes;
 	va_list		valist;
 
+	if (!format)
+		return (-1);
+	if (*format == '\0')
+		return (0);
 	if (!(flags = ft_create_flags()))
 		return (-1);
 	bytes = 0;
@@ -92,11 +100,8 @@ int			ft_printf(const char *format, ...)
 	va_start(valist, format);
 	while (*fstr)
 	{
-		if (*fstr == '%')
-		{
-			fstr++;
+		if (*fstr == '%' && (fstr++))
 			bytes += ft_output_format(&fstr, flags, valist);
-		}
 		else
 			bytes += ft_output_nonformat(&fstr);
 	}
