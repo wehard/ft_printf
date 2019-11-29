@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:25:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/22 19:31:38 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:12:51 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 ** int	ft_handle_c(int c, t_flags *flags)
 */
 
-int	ft_handle_c(t_p_buf *dest, va_list valist, t_flags *flags)
+int	ft_handle_c(va_list valist, t_flags *flags)
 {
 	char c;
 
 	c = va_arg(valist, int);
-	return (ft_format_output(dest, flags, &c, 1));
+	return (ft_format(flags, &c, 1));
 }
 
-int	ft_handle_s(t_p_buf *dest, va_list valist, t_flags *flags)
+int	ft_handle_s(va_list valist, t_flags *flags)
 {
 	char	*s;
 	int		len;
@@ -37,5 +37,5 @@ int	ft_handle_s(t_p_buf *dest, va_list valist, t_flags *flags)
 		len = ft_min(ft_strlen(s), flags->precision);
 	else
 		len = ft_strlen(s);
-	return (ft_format_output(dest, flags, s, len));
+	return (ft_format(flags, s, len));
 }

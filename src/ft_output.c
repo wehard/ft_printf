@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/25 13:50:15 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:21:08 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,39 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-int		ft_format_output(t_p_buf *dest, t_flags *flags, char *data, int len)
+int		ft_format(t_flags *flags, char *data, int len)
 {
+	int bytes;
 	int padding;
 
+	bytes = 0;
 	padding = flags->width - len - flags->prefixlen;
 	if (flags->minus)
 	{
 		if (flags->prefix_specified)
-			ft_outchar_buf(dest, flags->prefix, flags->prefixlen);
-		ft_outchar_buf(dest, data, len);
+			bytes += ft_outchar(flags->prefix, flags->prefixlen);
+		bytes += ft_outchar(data, len);
 		while (padding-- > 0)
-			ft_outchar_buf(dest, SPACE, 1);
+			bytes += ft_outchar(SPACE, 1);
 	}
 	else
 	{
 		while (padding-- > 0)
-			ft_outchar_buf(dest, SPACE, 1);
+			bytes += ft_outchar(SPACE, 1);
 		if (flags->prefix_specified)
-			ft_outchar_buf(dest, flags->prefix, flags->prefixlen);
-		ft_outchar_buf(dest, data, len);
+			bytes += ft_outchar(flags->prefix, flags->prefixlen);
+		bytes += ft_outchar(data, len);
 	}
-	return (padding + len);
+	return (bytes);
 }
 
-int		ft_format_output_w_zero_pad(t_p_buf *dest, t_flags *flags, char *data, int len)
+int		ft_format_zp(t_flags *flags, char *data, int len)
 {
+	int bytes;
 	int precision_left;
 	int width_left;
 
+	bytes = 0;
 	precision_left = 0;
 	width_left = 0;
 	if (flags->precision_specified)
@@ -58,39 +62,30 @@ int		ft_format_output_w_zero_pad(t_p_buf *dest, t_flags *flags, char *data, int 
 	if (flags->minus)
 	{
 		if (flags->prefix_specified)
-			ft_outchar_buf(dest, flags->prefix, flags->prefixlen);
+			bytes += ft_outchar(flags->prefix, flags->prefixlen);
 		while (precision_left-- > 0)
-			ft_outchar_buf(dest, ZERO, 1);
-		ft_outchar_buf(dest, data, len);
+			bytes += ft_outchar(ZERO, 1);
+		bytes += ft_outchar(data, len);
 		while (width_left-- > 0)
-			ft_outchar_buf(dest, flags->zero_specified ? ZERO : SPACE, 1);
+			bytes += ft_outchar(flags->zero_specified ? ZERO : SPACE, 1);
 	}
 	else
 	{
 		if (flags->zero_specified && flags->prefix_specified)
-			ft_outchar_buf(dest, flags->prefix, flags->prefixlen);
+			bytes += ft_outchar(flags->prefix, flags->prefixlen);
 		while (width_left-- > 0)
-			ft_outchar_buf(dest, flags->zero_specified ? ZERO : SPACE, 1);
+			bytes += ft_outchar(flags->zero_specified ? ZERO : SPACE, 1);
 		if (!flags->zero_specified && flags->prefix_specified)
-			ft_outchar_buf(dest, flags->prefix, flags->prefixlen);
+			bytes += ft_outchar(flags->prefix, flags->prefixlen);
 		while (precision_left-- > 0)
-			ft_outchar_buf(dest, ZERO, 1);
-		ft_outchar_buf(dest, data, len);
+			bytes += ft_outchar(ZERO, 1);
+		bytes += ft_outchar(data, len);
 	}
-	return (dest->start - dest->at);
+	return (bytes);
 }
 
-int		ft_outchar_buf(t_p_buf *dest, const char *data, unsigned int len)
+int		ft_outchar(const char *data, unsigned int len)
 {
-	while (len)
-	{
-		*(dest->at++) = *(data++);
-		len--;
-	}
+	write(1, data, len);
 	return (len);
-}
-
-void	ft_write(char *buf, size_t nbyte)
-{
-	write(1, buf, nbyte);
 }

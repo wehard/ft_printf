@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/25 13:47:46 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:17:10 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,6 @@
 # define LEN_LL 4
 # define LEN_LD 5
 
-
-
-typedef struct	s_p_buff
-{
-	char		*start;
-	char		*at;
-	size_t		size;
-}				t_p_buf;
-
 typedef struct	s_flags
 {
 	int			hash;
@@ -63,7 +54,7 @@ typedef struct	s_flags
 	int			prefixlen;
 }				t_flags;
 
-typedef int		(*t_s_func)(t_p_buf *, va_list, t_flags *);
+typedef int		(*t_s_func)(va_list, t_flags *);
 
 typedef struct	s_sp_type
 {
@@ -72,7 +63,7 @@ typedef struct	s_sp_type
 }				t_sp_type;
 
 
-int				ft_printf(const char *restrict format, ...); //__attribute__ ((format(printf, 1, 2)));
+int				ft_printf(const char *format, ...);
 
 t_flags			*ft_create_flags(void);
 void			ft_init_flags(t_flags *flags);
@@ -83,39 +74,34 @@ int				ft_parse_width(char **fstr, t_flags *flags, va_list valist);
 int				ft_parse_precision(char **fstr, t_flags *flags, va_list valist);
 int				ft_parse_length(char **fstr, t_flags *flags);
 
-int				ft_outchar_buf(t_p_buf *dest, const char *data,\
-								unsigned int len);
-int				ft_format_output(t_p_buf *dest, t_flags *flags,\
-								char *data, int len);
-int				ft_format_output_w_zero_pad(t_p_buf *dest, t_flags *flags, char *data, int len);
-void			ft_write(char *buf, size_t nbyte);
-
-t_p_buf			*ft_create_p_buf(char *dest);
-int				ft_resize_p_buf(t_p_buf *pbuf);
+int				ft_outchar(const char *data, unsigned int len);
+int				ft_format(t_flags *flags, char *data, int len);
+int				ft_format_zp(t_flags *flags, char *data, int len);
+//void			ft_write(char *buf, size_t nbyte);
 
 /*
 ** Handle strings and chars
 */
 
-int				ft_handle_c(t_p_buf *dest, va_list valist, t_flags *flags);
-int				ft_handle_s(t_p_buf *dest, va_list valist, t_flags *flags);
+int				ft_handle_c(va_list valist, t_flags *flags);
+int				ft_handle_s(va_list valist, t_flags *flags);
 
 /*
 ** Handle numbers
 */
 
-int				ft_handle_di(t_p_buf *dest, va_list valist, t_flags *flags);
-int				ft_handle_o(t_p_buf *dest, va_list valist, t_flags *flags);
-int				ft_handle_u(t_p_buf *dest, va_list valist, t_flags *flags);
-int				ft_handle_f(t_p_buf *dest, va_list valist, t_flags *flags);
+int				ft_handle_di(va_list valist, t_flags *flags);
+int				ft_handle_o(va_list valist, t_flags *flags);
+int				ft_handle_u(va_list valist, t_flags *flags);
+int				ft_handle_f(va_list valist, t_flags *flags);
 
 /*
 ** Handle others (pointer and hex conversion) + percent
 */
 
-int				ft_handle_p(t_p_buf *dest, va_list valist, t_flags *flags);
-int				ft_handle_x_low(t_p_buf *dest, va_list valist, t_flags *flags);
-int				ft_handle_x_up(t_p_buf *dest, va_list valist, t_flags *flags);
-int				ft_handle_percent(t_p_buf *dest, t_flags *flags);
+int				ft_handle_p(va_list valist, t_flags *flags);
+int				ft_handle_x_low(va_list valist, t_flags *flags);
+int				ft_handle_x_up(va_list valist, t_flags *flags);
+int				ft_handle_percent(t_flags *flags);
 
 #endif

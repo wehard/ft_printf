@@ -6,14 +6,14 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:42:28 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/22 19:25:04 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:01:22 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-int	ft_handle_p(t_p_buf *dest, va_list valist, t_flags *flags)
+int	ft_handle_p(va_list valist, t_flags *flags)
 {
 	char		*str;
 	char		*tmp;
@@ -27,13 +27,13 @@ int	ft_handle_p(t_p_buf *dest, va_list valist, t_flags *flags)
 		str = "0";
 	else
 		str = ft_itoa_base_uint64(p, BASE16LOW);
-	bytes = ft_format_output(dest, flags, str, ft_strlen(str));
+	bytes = ft_format(flags, str, ft_strlen(str));
 	if (p)
 		free(str);
 	return (bytes);
 }
 
-int	ft_handle_x_low(t_p_buf *dest, va_list valist, t_flags *flags)
+int	ft_handle_x_low(va_list valist, t_flags *flags)
 {
 	char			*str;
 	uint64_t		n;
@@ -57,12 +57,12 @@ int	ft_handle_x_low(t_p_buf *dest, va_list valist, t_flags *flags)
 		str = ft_strdup("");
 	else
 		str = ft_itoa_base_uint64(n, BASE16LOW);
-	bytes = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
+	bytes = ft_format_zp(flags, str, ft_strlen(str));
 	free(str);
 	return (bytes);
 }
 
-int	ft_handle_x_up(t_p_buf *dest, va_list valist, t_flags *flags)
+int	ft_handle_x_up(va_list valist, t_flags *flags)
 {
 	char			*str;
 	uint64_t		n;
@@ -86,16 +86,17 @@ int	ft_handle_x_up(t_p_buf *dest, va_list valist, t_flags *flags)
 		str = ft_strdup("");
 	else
 		str = ft_itoa_base_uint64(n, BASE16UP);
-	bytes = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
+	bytes = ft_format_zp(flags, str, ft_strlen(str));
 	free(str);
 	return (bytes);
 }
 
-int	ft_handle_percent(t_p_buf *dest, t_flags *flags)
+int	ft_handle_percent(t_flags *flags)
 {
 	size_t bytes;
+
 	if (flags->minus && flags->zero_specified)
 		flags->zero_specified = 0;
-	bytes = ft_format_output_w_zero_pad(dest, flags, PERCENT, 1);
+	bytes = ft_format_zp(flags, PERCENT, 1);
 	return (bytes);
 }

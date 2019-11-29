@@ -6,14 +6,14 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 14:43:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:00:43 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-int	ft_handle_di(t_p_buf *dest, va_list valist, t_flags *flags)
+int	ft_handle_di(va_list valist, t_flags *flags)
 {
 	char	*str;
 	char	*tmp;
@@ -46,12 +46,12 @@ int	ft_handle_di(t_p_buf *dest, va_list valist, t_flags *flags)
 		str = ft_strdup("");
 	else
 		str = ft_itoa_uint64(n < 0 ? (uint64_t)(n * -1) : (uint64_t)n);
-	bytes = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
+	bytes = ft_format_zp(flags, str, ft_strlen(str));
 	free(str);
 	return (bytes);
 }
 
-int	ft_handle_o(t_p_buf *dest, va_list valist, t_flags *flags)
+int	ft_handle_o(va_list valist, t_flags *flags)
 {
 	char		*str;
 	uint64_t	n;
@@ -78,12 +78,12 @@ int	ft_handle_o(t_p_buf *dest, va_list valist, t_flags *flags)
 		str = ft_strdup("");
 	else
 		str = ft_itoa_base_uint64(n, BASE8);
-	bytes = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
+	bytes = ft_format_zp(flags, str, ft_strlen(str));
 	free(str);
 	return (bytes);
 }
 
-int	ft_handle_u(t_p_buf *dest, va_list valist, t_flags *flags)
+int	ft_handle_u(va_list valist, t_flags *flags)
 {
 	char		*str;
 	uint64_t	n;
@@ -105,16 +105,16 @@ int	ft_handle_u(t_p_buf *dest, va_list valist, t_flags *flags)
 		str = ft_strdup("");
 	else
 		str = ft_itoa_uint64(n);
-	bytes = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
+	bytes = ft_format_zp(flags, str, ft_strlen(str));
 	free(str);
 	return (bytes);
 }
 
-int	ft_handle_f(t_p_buf *dest, va_list valist, t_flags *flags)
+int	ft_handle_f(va_list valist, t_flags *flags)
 {
 	char		*str;
 	long double	d;
-	int			i;
+	int			bytes;
 
 	if (!flags->precision_specified)
 		flags->precision = 6;
@@ -137,7 +137,7 @@ int	ft_handle_f(t_p_buf *dest, va_list valist, t_flags *flags)
 		str = ft_strjoin(ft_dtoa((d < 0 ? -d : d), flags->precision), ".");
 	else
 		str = ft_dtoa((d < 0 ? -d : d), flags->precision);
-	i = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
+	bytes = ft_format_zp(flags, str, ft_strlen(str));
 	free(str);
-	return (i);
+	return (bytes);
 }
