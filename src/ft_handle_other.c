@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:42:28 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 19:39:59 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:49:35 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int	ft_handle_p(t_flags *flags, va_list valist)
 {
 	char		*str;
-	char		*tmp;
 	uint64_t	p;
 	int			bytes;
 

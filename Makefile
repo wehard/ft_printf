@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/11/29 19:42:33 by wkorande         ###   ########.fr        #
+#    Updated: 2019/11/29 19:48:23 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT = libft.a
 
 LIBFTDIR = ../libft
 
-FLAGS = #-Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 SRC = 	ft_printf.c\
 		ft_handle_str.c\
@@ -33,7 +33,7 @@ SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 
 OBJS = $(SRC:.c=.o)
 
-INCLDIR = 	include
+INCLDIR = include
 
 all: $(NAME)
 

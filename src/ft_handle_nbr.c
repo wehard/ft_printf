@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 19:40:28 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:49:15 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 int	ft_handle_di(t_flags *flags, va_list valist)
 {
 	char	*str;
-	char	*tmp;
 	int64_t	n;
 	int		bytes;
-	size_t	len;
 
 	n = ft_cast_signed(flags->length, valist);
 	if (n < 0)
