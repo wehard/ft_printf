@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/28 18:42:33 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:43:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,10 @@ int	ft_handle_f(t_p_buf *dest, va_list valist, t_flags *flags)
 	}
 	if (flags->minus)
 		flags->zero_specified = 0;
-	str = ft_dtoa((d < 0 ? -d : d), flags->precision);
+	if (flags->hash && flags->precision_specified && flags->precision == 0)
+		str = ft_strjoin(ft_dtoa((d < 0 ? -d : d), flags->precision), ".");
+	else
+		str = ft_dtoa((d < 0 ? -d : d), flags->precision);
 	i = ft_format_output_w_zero_pad(dest, flags, str, ft_strlen(str));
 	free(str);
 	return (i);

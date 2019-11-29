@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:17:13 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/28 18:30:52 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:57:22 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,10 @@ int	main(void)
 	//int a = ft_printf("hello");
 	//ft_putchar('\n');
 	//ft_putnbr(a);
-	test_ft_printf("f", "%f", 573.236);
-	float f = 3.9999999;
-	test_ft_printf("", "%f", 3.9999999);
-	printf("%.8Lf\n", 43.43999949l);
-	ft_printf("%.8Lf\n", 43.43999949l);
-	return (0);
+	//test_ft_printf("f", "%f", 573.236);
+	//float f = 3.9999999;
+	//test_ft_printf("", "%f", 3.9999999);
+	//printf("%.8Lf\n", 43.43999949l);
+	//ft_printf("%.8Lf\n", 43.43999949l);
+	test_ft_printf("%-5%","%-5%");
 }
