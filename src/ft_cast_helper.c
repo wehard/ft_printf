@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:54:11 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/01 15:08:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 17:23:54 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ unsigned long long	ft_cast_unsigned(int length, va_list valist)
 	return (n);
 }
 
-long double	ft_cast_double(int length, va_list valist)
+long double			ft_cast_double(int length, va_list valist)
 {
 	long double d;
 
