@@ -6,16 +6,12 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:25:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 19:40:44 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 15:04:04 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
-
-/*
-** int	ft_handle_c(int c, t_flags *flags)
-*/
 
 int	ft_handle_c(t_flags *flags, va_list valist)
 {

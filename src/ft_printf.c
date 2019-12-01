@@ -6,13 +6,11 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:48:42 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 20:22:32 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 15:02:14 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdarg.h>
-#include "libft.h"
 #include "ft_printf.h"
 
 t_sp_type	g_output_types[N_HANDLERS] =

@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 15:22:37 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/01 14:40:48 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/01 14:47:28 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,17 +118,17 @@ $(NAME):
 	@gcc -Wall -Wextra -Werror -I $(INCL) -c $(SRCS)
 	@ar rc $(NAME) $(OUT)
 	@ranlib $(NAME)
-	@printf "$(GREEN)%s$(NORMAL)\n" "done."
+	@printf "$(YELLOW)%s$(NORMAL)\n" "done"
 
 clean:
 	@printf "$(BOLDBLUE)%s$(NORMAL)\n" "Removing $(OUT)"
 	@rm -f $(OUT)
-	@printf "$(GREEN)%s$(NORMAL)\n" "done."
+	@printf "$(BLUE)%s$(NORMAL)\n" "done"
 
 fclean: clean
 	@printf "$(BOLDBLUE)%s$(NORMAL)\n" "Removing $(NAME)"
 	@rm -f $(NAME)
-	@printf "$(GREEN)%s$(NORMAL)\n" "done."
+	@printf "$(BLUE)%s$(NORMAL)\n" "done"
 
 re: fclean all
 

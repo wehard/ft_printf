@@ -6,13 +6,12 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:48:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 19:16:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 15:03:16 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
 #include "ft_printf.h"
+#include "libft.h"
 
 int		ft_parse_flags(char **fstr, t_flags *flags)
 {

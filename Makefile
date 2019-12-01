@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/01 14:41:02 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/01 14:47:55 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,19 +60,19 @@ $(NAME):
 	@gcc $(FLAGS) -I $(INCLDIR) -I $(LIBFTDIR)/includes -c $(SRCS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@printf "$(GREEN)%s\n$(NORMAL)" "done."
+	@printf "$(YELLOW)%s\n$(NORMAL)" "done"
 
 clean:
 	@make clean -C $(LIBFTDIR)
 	@printf "$(BOLDBLUE)%s$(NORMAL)\n" "Removing $(OBJS)"
 	@rm -f $(OBJS)
-	@printf "$(GREEN)%s$(NORMAL)\n" "done."
+	@printf "$(BLUE)%s$(NORMAL)\n" "done"
 
 fclean: clean
 	@make fclean -C $(LIBFTDIR)
 	@printf "$(BOLDBLUE)%s$(NORMAL)\n" "Removing $(NAME)"
 	@rm -f $(NAME)
-	@printf "$(GREEN)%s$(NORMAL)\n" "done."
+	@printf "$(BLUE)%s$(NORMAL)\n" "done"
 
 re: fclean all
 

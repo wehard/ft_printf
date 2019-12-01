@@ -6,12 +6,11 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 18:31:35 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 15:03:40 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "libft.h"
 #include "ft_printf.h"
 
 int			ft_format(t_flags *flags, char *data, int len)
