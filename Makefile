@@ -6,15 +6,31 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 10:33:45 by wkorande          #+#    #+#              #
-#    Updated: 2019/11/29 19:48:23 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/01 14:41:02 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
+BLACK=\033[30m
+RED=\033[0;31m
+BOLDRED=\033[1;31m
+GREEN=\033[0;32m
+BOLDGREEN=\033[1;32m
+YELLOW=\033[0;33m
+BOLDYELLOW=\033[1;33m
+BLUE=\033[0;34m
+BOLDBLUE=\033[1;34m
+PINK=\033[0;35m
+BOLDPINK=\033[1;35m
+CYAN=\033[0;36m
+BOLDCYAN=\033[1;36m
+WHITE=\033[37m
+NORMAL=\033[0m
+
 LIBFT = libft.a
 
-LIBFTDIR = ../libft
+LIBFTDIR = libft
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -38,24 +54,25 @@ INCLDIR = include
 all: $(NAME)
 
 $(NAME):
-	@printf "\033[31m%s\n\033[34m" "Making $(LIBFT)"
 	@make -C $(LIBFTDIR)
-	@printf "\033[31m%s\n\033[34m" "Copying $(LIBFT) and renaming to $(NAME)"
 	@cp $(LIBFTDIR)/$(LIBFT) $(NAME)
-	@printf "\033[31m%s\n\033[34m" "Creating objects from $(SRCS)"
+	@printf "$(BOLDYELLOW)%s\n$(NORMAL)" "Making $(NAME)"
 	@gcc $(FLAGS) -I $(INCLDIR) -I $(LIBFTDIR)/includes -c $(SRCS)
-	@printf "\033[31m%s\n\033[34m" "Creating final $(NAME)"
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
+	@printf "$(GREEN)%s\n$(NORMAL)" "done."
 
 clean:
-	@printf "\033[1;30m"
 	@make clean -C $(LIBFTDIR)
+	@printf "$(BOLDBLUE)%s$(NORMAL)\n" "Removing $(OBJS)"
 	@rm -f $(OBJS)
+	@printf "$(GREEN)%s$(NORMAL)\n" "done."
 
 fclean: clean
-	make fclean -C $(LIBFTDIR)
-	rm -f $(NAME)
+	@make fclean -C $(LIBFTDIR)
+	@printf "$(BOLDBLUE)%s$(NORMAL)\n" "Removing $(NAME)"
+	@rm -f $(NAME)
+	@printf "$(GREEN)%s$(NORMAL)\n" "done."
 
 re: fclean all
 
