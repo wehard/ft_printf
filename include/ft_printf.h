@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 18:38:16 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/01 15:12:41 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 17:25:20 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void				ft_init_flags(t_flags *flags);
 void				ft_set_prefix(t_flags *flags, char *prefix, int len);
 int					ft_parse_flags(char **fstr, t_flags *flags);
 int					ft_parse_width(char **fstr, t_flags *flags, va_list valist);
-int					ft_parse_precision(char **fstr, t_flags *flags, va_list valist);
+int					ft_parse_precision(char **fstr, t_flags *flags,
+										va_list valist);
 int					ft_parse_length(char **fstr, t_flags *flags);
 int					ft_format(t_flags *flags, char *data, int len);
 int					ft_format_zp(t_flags *flags, char *data, int len);
