@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 13:38:26 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/29 14:31:23 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 15:27:24 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ char				*ft_dtoa(long double d, int precision);
 char				*ft_itoa_base(int n, char *digits);
 int					ft_ndigits(int n);
 int					ft_ndigits_base(int n, int base);
-int					ft_ndigits_base_int64(int64_t n, int base);
-int					ft_ndigits_base_uint64(uint64_t n, int base);
-char				*ft_itoa_int64(int64_t n);
-char				*ft_itoa_uint64(uint64_t n);
-char				*ft_itoa_base_uint64(uint64_t n, char *digits);
+int					ft_ndigits_base_ll(long long n, int base);
+int					ft_ndigits_base_ull(unsigned long long n, int base);
+char				*ft_itoa_ll(long long n);
+char				*ft_itoa_ull(unsigned long long n);
+char				*ft_itoa_base_ull(unsigned long long n, char *digits);
 
 #endif

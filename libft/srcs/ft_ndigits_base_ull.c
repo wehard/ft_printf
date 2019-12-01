@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ndigits_base_int64.c                            :+:      :+:    :+:   */
+/*   ft_ndigits_base_ull.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 12:22:51 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/22 13:37:08 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 15:19:32 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_ndigits_base_int64(int64_t n, int base)
+int	ft_ndigits_base_ull(unsigned long long n, int base)
 {
 	int i;
 

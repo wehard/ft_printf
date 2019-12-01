@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_uint64.c                                   :+:      :+:    :+:   */
+/*   ft_ndigits_base_ll.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/17 14:46:08 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/22 15:06:08 by wkorande         ###   ########.fr       */
+/*   Created: 2019/10/29 12:22:51 by wkorande          #+#    #+#             */
+/*   Updated: 2019/12/01 15:18:49 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_itoa_uint64(uint64_t n)
+int	ft_ndigits_base_ll(long long n, int base)
 {
-	char		*str;
-	int			len;
+	int i;
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	len = (size_t)ft_ndigits_base_int64(n, 10);
-	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
-		return (NULL);
-	str[len] = '\0';
-	while (len--)
+	i = 0;
+	while (n != 0)
 	{
-		str[len] = (n % 10) + '0';
-		n /= 10;
+		n /= base;
+		i++;
 	}
-	return (str);
+	return (i);
 }

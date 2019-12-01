@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_int64.c                                    :+:      :+:    :+:   */
+/*   ft_itoa_ll.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:46:08 by wkorande          #+#    #+#             */
-/*   Updated: 2019/11/22 15:04:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 15:17:29 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_itoa_int64(int64_t n)
+char	*ft_itoa_ll(long long n)
 {
 	char		*str;
-	uint64_t	nbr;
+	long long	nbr;
 	int			len;
 
 	if (n == INT64_MIN)
@@ -24,10 +24,10 @@ char	*ft_itoa_int64(int64_t n)
 	if (n == 0)
 		return (ft_strdup("0"));
 	if (n < 0)
-		nbr = (uint64_t)(n * -1);
+		nbr = (unsigned long long)(n * -1);
 	else
-		nbr = (uint64_t)n;
-	len = (size_t)ft_ndigits_base_int64(n, 10) + (n < 0);
+		nbr = (unsigned long long)n;
+	len = (size_t)ft_ndigits_base_ll(n, 10) + (n < 0);
 	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	str[len] = '\0';

@@ -6,15 +6,15 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:54:11 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/01 15:06:07 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 15:08:37 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int64_t		ft_cast_signed(int length, va_list valist)
+long long			ft_cast_signed(int length, va_list valist)
 {
-	int64_t n;
+	long long n;
 
 	if (length == LEN_HH)
 		n = (char)va_arg(valist, int);
@@ -29,9 +29,9 @@ int64_t		ft_cast_signed(int length, va_list valist)
 	return (n);
 }
 
-uint64_t	ft_cast_unsigned(int length, va_list valist)
+unsigned long long	ft_cast_unsigned(int length, va_list valist)
 {
-	uint64_t n;
+	unsigned long long n;
 
 	if (length == LEN_HH)
 		n = (unsigned char)va_arg(valist, unsigned int);

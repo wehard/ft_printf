@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:41:22 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/01 15:05:40 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/01 15:20:30 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 int	ft_handle_di(t_flags *flags, va_list valist)
 {
-	char	*str;
-	int64_t	n;
-	int		bytes;
+	char		*str;
+	long long	n;
+	int			bytes;
 
 	n = ft_cast_signed(flags->length, valist);
 	if (n < 0)
@@ -34,7 +34,7 @@ int	ft_handle_di(t_flags *flags, va_list valist)
 	if (flags->precision_specified && flags->precision == 0)
 		str = ft_strdup("");
 	else
-		str = ft_itoa_uint64(n < 0 ? (uint64_t)(n * -1) : (uint64_t)n);
+		str = ft_itoa_ull(n < 0 ? (long long)(n * -1) : (long long)n);
 	bytes = ft_format_zp(flags, str, ft_strlen(str));
 	free(str);
 	return (bytes);
@@ -42,9 +42,9 @@ int	ft_handle_di(t_flags *flags, va_list valist)
 
 int	ft_handle_o(t_flags *flags, va_list valist)
 {
-	char		*str;
-	uint64_t	n;
-	int			bytes;
+	char				*str;
+	unsigned long long	n;
+	int					bytes;
 
 	n = ft_cast_unsigned(flags->length, valist);
 	if (flags->precision_specified)
@@ -57,7 +57,7 @@ int	ft_handle_o(t_flags *flags, va_list valist)
 	if (flags->precision_specified && flags->precision == 0 && !flags->hash)
 		str = ft_strdup("");
 	else
-		str = ft_itoa_base_uint64(n, BASE8);
+		str = ft_itoa_base_ull(n, BASE8);
 	bytes = ft_format_zp(flags, str, ft_strlen(str));
 	free(str);
 	return (bytes);
@@ -65,9 +65,9 @@ int	ft_handle_o(t_flags *flags, va_list valist)
 
 int	ft_handle_u(t_flags *flags, va_list valist)
 {
-	char		*str;
-	uint64_t	n;
-	int			bytes;
+	char				*str;
+	unsigned long long	n;
+	int					bytes;
 
 	n = ft_cast_unsigned(flags->length, valist);
 	if (flags->precision_specified)
@@ -75,7 +75,7 @@ int	ft_handle_u(t_flags *flags, va_list valist)
 	if (flags->precision_specified && flags->precision == 0)
 		str = ft_strdup("");
 	else
-		str = ft_itoa_uint64(n);
+		str = ft_itoa_ull(n);
 	bytes = ft_format_zp(flags, str, ft_strlen(str));
 	free(str);
 	return (bytes);
