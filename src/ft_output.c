@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:39 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/01 15:03:40 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/03 19:08:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	ft_format_zp_left(t_flags *flags, char *data, int len)
 		bytes += ft_outchar(ZERO, 1);
 	bytes += ft_outchar(data, len);
 	while (flags->width_left-- > 0)
-		bytes += ft_outchar(flags->zero_specified ? ZERO : SPACE, 1);
+		bytes += ft_outchar(SPACE, 1);
 	return (bytes);
 }
 
